@@ -1,16 +1,38 @@
-use utoipa::{OpenApi, openapi::{security::{HttpAuthScheme, HttpBuilder, SecurityScheme}}};
-use crate::auth::dto::{LoginRequest, RegisterRequest, TokenResponse};
+use utoipa::{
+    OpenApi, 
+    openapi::{
+        security::{
+            HttpAuthScheme, 
+            HttpBuilder, 
+            SecurityScheme,
+        },
+    },
+};
+use crate::{
+    auth::dto::{
+        LoginRequest, 
+        RegisterRequest, 
+        TokenResponse,
+    }, 
+    brain_dump::dto::BrainDumpPostRequest,
+};
 
 #[derive(OpenApi)]
 #[openapi(
     paths(
         crate::auth::handlers::register,
         crate::auth::handlers::login,
+        crate::brain_dump::handlers::post_brain_dump,
         crate::feature::handlers::get_feature,
         crate::feature::handlers::get_protected_feature
     ),
     components(
-        schemas(LoginRequest, RegisterRequest, TokenResponse)
+        schemas(
+            LoginRequest, 
+            RegisterRequest, 
+            TokenResponse,
+            BrainDumpPostRequest,
+        )
     ),
     tags(
         (name = "auth", description = "Authentication related endpoints")
