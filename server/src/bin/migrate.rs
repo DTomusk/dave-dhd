@@ -1,11 +1,13 @@
 use sqlx::postgres::PgPoolOptions;
+use server::config::Config;
 
 #[tokio::main]
-async fn main() -> Result<(), sqlx::Error> {
-    let database_url = std::env::var("DATABASE_URL").unwrap();
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    dotenvy::dotenv().ok();
+    let config = Config::from_env()?;
 
     let pool = PgPoolOptions::new()
-        .connect(&database_url)
+        .connect(&config.database_url)
         .await?;
 
     sqlx::migrate!("./migrations")

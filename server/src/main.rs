@@ -2,21 +2,13 @@ use std::{net::SocketAddr, sync::Arc};
 use sqlx::postgres::PgPoolOptions;
 use tracing::info;
 
-use crate::{
+use server::{
     app_state::AppState, 
     auth::service::AuthService,
     repos::user_repo::UserRepo,
+    config::Config,
+    app,
 };
-
-mod app;
-mod app_state;
-mod auth;
-mod config;
-mod feature;
-mod middleware;
-mod openapi;
-mod repos;
-mod user;
 
 // tokio multithreaded runtime needs to be enabled, use full features for simplicity
 #[tokio::main]
@@ -29,7 +21,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with_env_filter(tracing_subscriber::EnvFilter::from_default_env())
         .init();
 
-    let config = config::Config::from_env()?;
+    let config = Config::from_env()?;
 
     let db_pool = PgPoolOptions::new()
         .max_connections(10)
