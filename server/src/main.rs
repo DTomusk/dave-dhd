@@ -3,11 +3,15 @@ use sqlx::postgres::PgPoolOptions;
 use tracing::info;
 
 use server::{
+    app, 
     app_state::AppState, 
-    auth::service::AuthService,
-    repos::user_repo::UserRepo,
-    config::Config,
-    app,
+    auth::service::AuthService, 
+    brain_dump::service::BrainDumpService, 
+    config::Config, 
+    repos::{
+        brain_dump_repo::BrainDumpRepo, 
+        user_repo::UserRepo,
+    },
 };
 
 // tokio multithreaded runtime needs to be enabled, use full features for simplicity
@@ -37,8 +41,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         AuthService::new(user_repo, config.jwt_secret.clone(), config.jwt_expiration_minutes)
     );
 
+    let brain_dump_repo = BrainDumpRepo::new(db_pool.clone());
+    let brain_dump_service = Arc::new(
+        BrainDumpService::new(brain_dump_repo)
+    );
+
     let app_state = AppState {
         auth_service,
+        brain_dump_service,
     };
 
     let app = app::build(app_state);
