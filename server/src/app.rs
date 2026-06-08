@@ -3,15 +3,11 @@ use tower_http::trace::TraceLayer;
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 use crate::{
-    app_state::AppState, 
-    auth, 
-    feature, 
-    middleware::rate_limit::{
+    app_state::AppState, auth, brain_dump, feature, middleware::rate_limit::{
         auth_rate_limit, 
         public_rate_limit, 
         user_rate_limit
-    }, 
-    openapi::ApiDoc,
+    }, openapi::ApiDoc
 };
 
 pub fn build(app_state: AppState) -> Router {
@@ -19,6 +15,7 @@ pub fn build(app_state: AppState) -> Router {
         .layer(public_rate_limit());
 
     let protected = feature::router::protected_router()
+        .merge(brain_dump::router::protected_router())
         .layer(user_rate_limit())
         .layer(middleware::from_fn_with_state(
             app_state.clone(), 

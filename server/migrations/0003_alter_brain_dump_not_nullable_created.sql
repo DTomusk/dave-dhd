@@ -1,0 +1,2 @@
+ALTER TABLE brain_dumps
+ALTER COLUMN created_at SET NOT NULL;
