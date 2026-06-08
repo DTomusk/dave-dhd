@@ -2,18 +2,6 @@
 
 ## In progress 
 
-- [ ] Brain dump (API)
-    - Priority: high 
-    - Area: 
-    - Type: feature
-    - Why: core use case of the site, store and retrieve the random thoughts that people (particularly those with ADHD) have throughout the day
-    - DoD: 
-        - POST: authenticated user can post a piece of text through an endpoint 
-        - GET: authenticated user can retrieve a paginated list of their brain dumps ordered by descending date time 
-            - Pagination is offset based rather than cursor based (known quantity of brain dumps per user and few updates)
-        - Unauthenticated users cannot access anyone's brain dumps 
-        - A given user can only access their own and no one else's brain dumps
-
 ## Planning
 
 - [ ] Initial GUI with sign in flow
@@ -49,3 +37,16 @@
     - DoD: 
 
 ## Done
+
+- [x] Brain dump (API)
+    - Priority: high 
+    - Area: 
+    - Type: feature
+    - Why: core use case of the site, store and retrieve the random thoughts that people (particularly those with ADHD) have throughout the day
+    - DoD: 
+        - [x] POST: authenticated user can post a piece of text through an endpoint 
+        - [x] GET: authenticated user can retrieve a paginated list of their brain dumps ordered by descending date time 
+            - [x] Pagination is offset based rather than cursor based (known quantity of brain dumps per user and few updates)
+        - [x] Unauthenticated users cannot access anyone's brain dumps 
+        - [x] A given user can only access their own and no one else's brain dumps
+        - [x] Updates have been deployed to fly.io and tested
