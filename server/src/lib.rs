@@ -7,4 +7,5 @@ pub mod feature;
 pub mod middleware;
 pub mod openapi;
 pub mod repos;
+pub mod shared;
 pub mod user;

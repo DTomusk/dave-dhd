@@ -16,11 +16,12 @@ impl UserRepo {
         &self,
         user: &User,
     ) -> Result<(), sqlx::Error> {
-        sqlx::query(
-            r#"INSERT INTO users (id, username, password_hash) VALUES ($1, $2, $3)"#
-        ).bind(user.id)
-        .bind(&user.username)
-        .bind(&user.password_hash)
+        sqlx::query!(
+            r#"INSERT INTO users (id, username, password_hash) VALUES ($1, $2, $3)"#,
+            user.id,
+            user.username,
+            user.password_hash
+        )
         .execute(&self.db)
         .await?;
         Ok(())
@@ -30,9 +31,11 @@ impl UserRepo {
         username: &str,
     ) -> Result<Option<User>, sqlx::Error> {
         // Eventually move to query_as!, but that requires connecting to db at compile
-        let user = sqlx::query_as::<_, User>(
-            r#"SELECT id, username, password_hash FROM users WHERE username = $1"#
-        ).bind(username)
+        let user = sqlx::query_as!(
+            User,
+            r#"SELECT id, username, password_hash FROM users WHERE username = $1"#,
+            username
+        )
         .fetch_optional(&self.db)
         .await?;
         Ok(user)
