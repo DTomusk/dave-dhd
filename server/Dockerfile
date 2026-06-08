@@ -5,6 +5,8 @@ WORKDIR /app
 
 COPY Cargo.toml Cargo.lock ./
 
+COPY ./.sqlx ./.sqlx
+
 # Create a dummy main.rs to build dependencies
 RUN mkdir src && echo "fn main() { println!(\"Hello, world!\"); }" > src/main.rs
 RUN cargo build
