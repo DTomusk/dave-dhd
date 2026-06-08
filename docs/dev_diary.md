@@ -25,6 +25,8 @@ I am not the biggest fan of frontend development. Having to design for lots of d
 
 To start with, I've run `pnpm create vite@latest` and chosen react with typescript compiler. I much prefer typescript to vanilla javascript much in the same way I prefer Rust and C# to Python. 
 
+Step 2 is gutting the template. That means removing all assets, .css files, app content etc. Come to think of it, I should make my own template, because I almost always use TanStack query, RHF, react router etc. and it's a pain to go through that whole boilerplate process at the start of every project. 
+
 ## 2026-06-05: First steps 
 Before making this repo, I made a small rust server template repo. The template has a server with docker, postgres, migrations and a simple jwt auth implementation. I realised the most annoying thing about starting a new project was having to write the boilerplate needed to set things up before doing actual feature work, so hopefully that should help. I'm also planning to build a language learning app, and I would like to use the same template there, so it's already theoretically paying off. 
 
