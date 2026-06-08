@@ -14,7 +14,10 @@ use crate::{
         RegisterRequest, 
         TokenResponse,
     }, 
-    brain_dump::dto::BrainDumpPostRequest,
+    brain_dump::dto::{
+        BrainDumpPostRequest, 
+        BrainDumpResponse,
+    },
 };
 
 #[derive(OpenApi)]
@@ -22,6 +25,7 @@ use crate::{
     paths(
         crate::auth::handlers::register,
         crate::auth::handlers::login,
+        crate::brain_dump::handlers::get_brain_dumps,
         crate::brain_dump::handlers::post_brain_dump,
         crate::feature::handlers::get_feature,
         crate::feature::handlers::get_protected_feature
@@ -31,8 +35,9 @@ use crate::{
             LoginRequest, 
             RegisterRequest, 
             TokenResponse,
+            BrainDumpResponse,
             BrainDumpPostRequest,
-        )
+        ),
     ),
     tags(
         (name = "auth", description = "Authentication related endpoints")

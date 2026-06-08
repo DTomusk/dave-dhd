@@ -1,11 +1,11 @@
-use axum::{Json, extract::State};
+use axum::{Json, debug_handler, extract::{Query, State}};
 use uuid::Uuid;
 
 use crate::{
     app_state::AppState, 
     auth::model::AuthUser, 
     brain_dump::{
-        dto::BrainDumpPostRequest, 
+        dto::{BrainDumpPostRequest, BrainDumpResponse}, 
         model::{BrainDump, BrainDumpQuery},
     }, 
     shared::pagination::dto::{
@@ -37,14 +37,27 @@ pub async fn post_brain_dump(
     Ok(())
 }
 
+#[utoipa::path(
+    get,
+    path = "/brain-dump",
+    tag = "brain-dump",
+    params(OffsetPaginationQuery),
+    responses(
+        (status = 200, body = OffsetPaginationResponse<BrainDumpResponse>, description = "Brain dumps retrieved successfully")
+    ),
+    security(
+        ("bearerAuth" = [])
+    ),
+)]
+#[debug_handler]
 pub async fn get_brain_dumps(
     State(app_state): State<AppState>,
     AuthUser { id }: AuthUser,
-    Json(request): Json<OffsetPaginationQuery>,
-) -> Result<OffsetPaginationResponse<BrainDump>, String> {
+    Query(request): Query<OffsetPaginationQuery>,
+) -> Result<Json<OffsetPaginationResponse<BrainDumpResponse>>, String> {
     let user_id = Uuid::parse_str(&id).map_err(|e| e.to_string())?;
     // normalise pagination to ensure limit is within bounds
-    let pagination = OffsetPaginationQuery::normalise(request.offset, request.limit);
+    let pagination = request.normalise();
 
     let query = BrainDumpQuery {
         user_id,
@@ -54,5 +67,11 @@ pub async fn get_brain_dumps(
 
     let (brain_dumps, total_count) = app_state.brain_dump_service.get_brain_dumps(&query).await.map_err(|e| e.to_string())?;
 
-    Ok(OffsetPaginationResponse::new(brain_dumps, total_count, pagination.offset, pagination.limit))
+    let brain_dump_responses: Vec<BrainDumpResponse> = brain_dumps.into_iter().map(|bd| BrainDumpResponse {
+        id: bd.id.to_string(),
+        content: bd.content,
+        created_at: bd.created_at.to_string(),
+    }).collect();
+
+    Ok(Json(OffsetPaginationResponse::new(brain_dump_responses, total_count, pagination.offset, pagination.limit)))
 }
