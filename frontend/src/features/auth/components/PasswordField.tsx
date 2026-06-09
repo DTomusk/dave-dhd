@@ -2,13 +2,15 @@ import { IconButton, TextField } from "@radix-ui/themes";
 import { useState, type ComponentPropsWithoutRef } from "react";
 import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import FormField from "../../../components/form/FormField";
+import type { FieldError } from "react-hook-form";
 
 interface PasswordFieldProps extends Omit<ComponentPropsWithoutRef<typeof TextField.Root>, "id" | "type"> {
     label: string;
     id: string;
+    error?: FieldError;
 }
 
-export default function PasswordField({ label, id, ...inputProps }: PasswordFieldProps) {
+export default function PasswordField({ label, id, error, ...inputProps }: PasswordFieldProps) {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
@@ -16,6 +18,7 @@ export default function PasswordField({ label, id, ...inputProps }: PasswordFiel
             label={label}
             id={id}
             type={showPassword ? "text" : "password"}
+            error={error}
             rightSlot={
                 <IconButton
                     type="button"

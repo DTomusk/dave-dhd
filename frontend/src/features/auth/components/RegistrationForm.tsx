@@ -18,7 +18,7 @@ export default function RegistrationForm({
     const {
         register,
         handleSubmit,
-        formState: { isSubmitting },
+        formState: { isSubmitting, errors },
     } = form
     return (
         // Container centers content and defines width
@@ -37,6 +37,7 @@ export default function RegistrationForm({
                                 label="Username"
                                 placeholder="Enter your username"
                                 id="username-field"
+                                error={errors.username}
                                 {...register("username")}
                             />
 
@@ -44,6 +45,7 @@ export default function RegistrationForm({
                                 label="Password"
                                 placeholder="Enter your password"
                                 id="password-field"
+                                error={errors.password}
                                 {...register("password")}
                             />
 
