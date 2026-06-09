@@ -1,51 +1,38 @@
-import { Box, Button, Card, Container, Flex, Heading, Text, TextField } from "@radix-ui/themes";
+import { Box, Button, Card, Container, Flex, Heading } from "@radix-ui/themes";
+import FormField from "../../../components/form/FormField";
+import PasswordField from "./PasswordField";
 
-export default function RegistrationForm() {
+interface RegistrationFormProps {
+    action: string;
+}
+
+export default function RegistrationForm({ action }: RegistrationFormProps) {
     return (
+        // Container centers content and defines width
         <Container size="1" minHeight="100vh">
+            {/* Flex centers the card both vertically and horizontally */}
             <Flex minHeight="100vh" align="center" justify="center">
+                {/* Box defines the maximum width of the card */}
                 <Box maxWidth="400px" width="100%">
                     <Card size="4">
                         <Heading as="h3" size="6" trim="start" mb="5">
-                            Sign up
+                            {action}
                         </Heading>
 
-                        <Box mb="5">
-                            <Flex mb="1">
-                                <Text
-                                    as="label"
-                                    htmlFor="username-field"
-                                    size="2"
-                                    weight="bold"
-                                >
-                                    Username
-                                </Text>
-                            </Flex>
-                            <TextField.Root
-                                placeholder="Enter your username"
-                                id="username-field"
-                            />
-                        </Box>
+                        <FormField
+                            label="Username"
+                            placeholder="Enter your username"
+                            id="username-field"
+                        />
 
-                        <Box mb="5" position="relative">
-                            <Flex mb="1">
-                                <Text
-                                    as="label"
-                                    size="2"
-                                    weight="bold"
-                                    htmlFor="password-field"
-                                >
-                                    Password
-                                </Text>
-                            </Flex>
-                            <TextField.Root
-                                placeholder="Enter your password"
-                                id="password-field"
-                            />
-                        </Box>
+                        <PasswordField
+                            label="Password"
+                            placeholder="Enter your password"
+                            id="password-field"
+                        />
 
                         <Flex mt="6" justify="end">
-                            <Button>Sign in</Button>
+                            <Button>{action}</Button>
                         </Flex>
                     </Card>
                 </Box>
