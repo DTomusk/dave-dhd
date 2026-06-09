@@ -3,6 +3,16 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-09:
+### Component library 
+There are a lot of react component libraries out there. The main thing is that I don't want to build components that have already been built a thousand times and better than I would. I want to focus on solving the problems my site solves. 
+
+I think I'll go with radix. The choice is kind of arbitrary, especially since I haven't tried out that many component libraries so I don't know what the strengths and weaknesses of different ones are, or what I value in a component library. 
+
+Start by running `pnpm add @radix-ui/themes`, then import the radix css file and wrap the app in the radix theme provider. I've wrapped the text in the home page in `Text` from radix and run dev and that looks to have worked. 
+
+Once I've gotten to the point where auth works on the frontend, I should go back to my template project and basically implement the exact same stuff there. That's another one of those tasks that's a bit tedious to set up and probably won't change much between projects. There are also a couple of other things that I should do in the template that will make next time easier, such as setting sqlx to use offline mode. 
+
 ## 2026-06-08: 
 ### Brain dump
 The first real use case is a simple brain dump. By that I mean a place where you can write something down and just forget about it. For me, I don't like using normal list apps or pen and paper because it's not simple to just write a thing down. You have to organise the list then and there, or you have to find your spot in your notebook. My intention with the brain dump is to make it as simple as possible to write a random thought down and then leave categorising and organising it til later. In fact, just this past weekend there were at least a dozen times when I would've found a simple brain dump useful. 
