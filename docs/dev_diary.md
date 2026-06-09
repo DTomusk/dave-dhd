@@ -7,11 +7,14 @@ Note: the days below are in reverse chronological order, but the content within 
 ### Component library 
 There are a lot of react component libraries out there. The main thing is that I don't want to build components that have already been built a thousand times and better than I would. I want to focus on solving the problems my site solves. 
 
-I think I'll go with radix. The choice is kind of arbitrary, especially since I haven't tried out that many component libraries so I don't know what the strengths and weaknesses of different ones are, or what I value in a component library. 
+I think I'll go with radix themes. The choice is kind of arbitrary, especially since I haven't tried out that many component libraries so I don't know what the strengths and weaknesses of different ones are, or what I value in a component library. Both radix themes and shadcn/ui are built on radix primitives, but themes is more opinionated than shadcn. Shadcn basically copies code into your repo that you have control over, which is not what I want. Radix themes very much seems like the good enough, low effort solution that I want.
 
 Start by running `pnpm add @radix-ui/themes`, then import the radix css file and wrap the app in the radix theme provider. I've wrapped the text in the home page in `Text` from radix and run dev and that looks to have worked. 
 
 Once I've gotten to the point where auth works on the frontend, I should go back to my template project and basically implement the exact same stuff there. That's another one of those tasks that's a bit tedious to set up and probably won't change much between projects. There are also a couple of other things that I should do in the template that will make next time easier, such as setting sqlx to use offline mode. 
+
+### Auth form 
+It's annoying building out a frontend at the start because there are so many different components to think of, not just in the sense of how things look and behave, but what you want to inject and generalise. My thinking is to first build one component that will be the registration form. Then, I want to extract anything reusable, e.g. form fields, card, layouts etc. Later I'll want to make the form itself generic so it can be used for either login or registration, and the page will control which one it is and which api hooks get called. 
 
 ## 2026-06-08: 
 ### Brain dump
