@@ -22,7 +22,7 @@ When working on my react projects, I almost exclusively use TanStack query for h
 
 Step 1: add query provider. This wraps the app so tanstack methods can be called anywhere and they have a shared cache etc. 
 
-
+Step 2: add fetch method. For now, I'm sticking to fetch for calling my API. I don't know much about it, I think axios is an alternative, but honestly fetch seems to get the job done. I've mainly copied over a function from a previous project and refactored it to split up what each part of the function does (constructing headers, constructing the body, calling fetch, and handling responses). This will be the query function in my hooks.
 
 ## 2026-06-09:
 ### Component library 
