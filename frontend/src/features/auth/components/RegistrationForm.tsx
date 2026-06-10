@@ -4,22 +4,17 @@ import PasswordField from "./PasswordField";
 import type { LoginSchema } from "../schemas/loginSchema";
 import type { UseFormReturn } from "react-hook-form";
 
-interface RegistrationFormProps {
-    action: string;
+type RegistrationFormProps = {
     form: UseFormReturn<LoginSchema>;
+    action: string;
     onSubmit: (data: LoginSchema) => void;
 }
 
-export default function RegistrationForm({ 
-    action, 
-    form,
-    onSubmit,
-}: RegistrationFormProps) {
-    const {
-        register,
-        handleSubmit,
-        formState: { isSubmitting, errors },
-    } = form
+export default function RegistrationForm(
+    { form, action, onSubmit }: RegistrationFormProps
+) {
+    const { handleSubmit, control, formState: { isSubmitting } } = form;
+
     return (
         // Container centers content and defines width
         <Container size="1" minHeight="100vh">
@@ -36,21 +31,27 @@ export default function RegistrationForm({
                             <FormField
                                 label="Username"
                                 placeholder="Enter your username"
-                                id="username-field"
-                                error={errors.username}
-                                {...register("username")}
+                                control={control}
+                                name="username"
+                                rules={{ required: "Username is required",
+                                    minLength: { value: 3, message: "Username must be at least 3 characters" },
+                                    maxLength: { value: 50, message: "Username must be at most 50 characters" },
+                                }}
                             />
 
                             <PasswordField
                                 label="Password"
                                 placeholder="Enter your password"
-                                id="password-field"
-                                error={errors.password}
-                                {...register("password")}
+                                control={control}
+                                name="password"
+                                rules={{ required: "Password is required",
+                                    minLength: { value: 6, message: "Password must be at least 6 characters" },
+                                    maxLength: { value: 50, message: "Password must be at most 50 characters" },
+                                }}
                             />
 
                             <Flex mt="6" justify="end">
-                                <Button type="submit" loading={isSubmitting}>{action}</Button>
+                                <Button type="submit" loading={isSubmitting} disabled={isSubmitting}>{action}</Button>
                             </Flex>
                         </Card>
                     </form>

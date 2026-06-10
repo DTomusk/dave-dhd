@@ -3,6 +3,18 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-10:
+### RHF
+I had to take a step back today because I realised I kept getting frustrated with the form I was building, and the reason was that I was trying to do too many things at once. I was trying to build a form that was broken down into a page, a form component, and a set of input components while using rhf and zod. Because I didn't know exactly how to execute all these ideas at once, I kept getting frustrated trying to figure out and solve the next issue. 
+
+So, instead, I took a pause and created a new repo just for practising building forms. I started with an incredibly simple form, just a text input and submit button with no rules, validation, or submit behaviour. I then built on top of that to include multiple inputs with various validation requirements, extracted input fields and introduced a UI library (Radix themes as well). By taking a step back and breaking the problem down, I was able to figure out how things fit together faster, and now I have a pattern that I can build on in this project.
+
+I've also decided to scrap zod for now because it isn't providing any real value at the moment. My forms are incredibly simple, and another dependency just adds extra complexity without much value. 
+
+Going forward, I'm going to try to not componentise until a reason presents itself. If I only ever do something once, then there's not much of a reason to make it reusable. I'm going to try to be pragmatic. As soon as there is a second use case, I will componentise so there's only ever one implementation. 
+
+### Integrating the front and back ends 
+
 ## 2026-06-09:
 ### Component library 
 There are a lot of react component libraries out there. The main thing is that I don't want to build components that have already been built a thousand times and better than I would. I want to focus on solving the problems my site solves. 

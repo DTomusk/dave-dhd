@@ -1,30 +1,55 @@
 import { Box, TextField, Text } from "@radix-ui/themes";
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import type { ReactNode } from "react";
 import FormFieldLabel from "./FormFieldLabel";
-import { type FieldError } from "react-hook-form";
+import { useController, type Control, type FieldPath, type FieldValues, type RegisterOptions } from "react-hook-form";
+import { CircleAlert } from 'lucide-react';
 
-interface FormFieldProps extends Omit<ComponentPropsWithoutRef<typeof TextField.Root>, "id"> {
-    label: string;
-    id: string;
-    rightSlot?: ReactNode;
-    error?: FieldError;
+export type FormFieldProps<
+    TFieldValues extends FieldValues,
+    TName extends FieldPath<TFieldValues>
+> = {
+    control: Control<TFieldValues>,
+    name: TName,
+    label?: string,
+    placeholder?: string,
+    rightSlot?: ReactNode,
+    rules?: RegisterOptions<TFieldValues, TName>,
+
+    type?: "text" | "password",
+    disabled?: boolean,
 }
 
-export default function FormField({ 
-    label, 
-    id, 
-    rightSlot, 
-    error, 
-    ...inputProps
-}: FormFieldProps) {
+export default function FormField<
+    TFieldValues extends FieldValues,
+    TName extends FieldPath<TFieldValues>
+>({ 
+    control,
+    name,
+    label,
+    placeholder,
+    rules,
+    type = "text",
+    disabled = false,
+    rightSlot,
+}: FormFieldProps<TFieldValues, TName>) {
+    const {
+        field,
+        fieldState: { error },
+    } = useController({ control, name, rules });
     return (
-        // TODO: might not want vertical spacing in this component
         <Box mb="5">
-            <FormFieldLabel htmlFor={id} label={label} />
+            {label && <FormFieldLabel htmlFor={name} label={label} />}
             <TextField.Root
-                id={id}
-                {...inputProps}
+                {...field}
+                value={field.value ?? ""}
+                placeholder={placeholder}
+                type={type}
+                disabled={disabled}
+                color={error ? "red" : undefined}
             >
+                {error && <TextField.Slot side="left">
+                    <CircleAlert size={16} color="red" />
+                </TextField.Slot>}
                 {rightSlot ? <TextField.Slot side="right">{rightSlot}</TextField.Slot> : null}
             </TextField.Root>
             {error && (
