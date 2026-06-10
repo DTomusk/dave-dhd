@@ -14,6 +14,15 @@ I've also decided to scrap zod for now because it isn't providing any real value
 Going forward, I'm going to try to not componentise until a reason presents itself. If I only ever do something once, then there's not much of a reason to make it reusable. I'm going to try to be pragmatic. As soon as there is a second use case, I will componentise so there's only ever one implementation. 
 
 ### Integrating the front and back ends 
+A couple of years ago, when I was still at Uni, I took part in a hackathon with my friends. None of us had really programmed before (that's not super true, I definitely had) and we decided to make a web app and a browser extension to recommend online shoppers more carbon friendly versions of the items they were browsing. One thing we realised during those 24 hours was that no one knew how to get the frontend to talk to the backend and vice-versa. So, in the end we ended up with a separate frontend and backend that we demoed separately. It was during that demo that I decided I was going to figure out how to integrate a front and back end. 
+
+And lo and behold, here we are today and I've managed to get several front and back ends talking to each other. Feels good. And that's what I'm planning on doing today. 
+
+When working on my react projects, I almost exclusively use TanStack query for handling caching, loading, refetching, invalidation etc. 
+
+Step 1: add query provider. This wraps the app so tanstack methods can be called anywhere and they have a shared cache etc. 
+
+
 
 ## 2026-06-09:
 ### Component library 
