@@ -4,5 +4,5 @@ export type RegistrationRequest = {
 }
 
 export type RegistrationResponse = {
-    jwt: string;
+    token: string;
 }

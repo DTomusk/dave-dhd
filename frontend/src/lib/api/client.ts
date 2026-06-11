@@ -1,3 +1,4 @@
+import { getToken } from "../auth/token";
 import { ApiError } from "./error";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
@@ -8,7 +9,7 @@ export async function apiFetch<T>(
     options: RequestInit = {}
 ): Promise<T> {
     // Replace with auth token retrieval logic
-    let token = localStorage.getItem('token');
+    let token = getToken();
 
     // Attempt API request
     let response = await sendRequest(endpoint, options, token);
