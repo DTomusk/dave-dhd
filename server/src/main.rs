@@ -51,7 +51,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         brain_dump_service,
     };
 
-    let app = app::build(app_state);
+    let app = app::build(app_state, config.allowed_origins.clone());
 
     let addr = format!("0.0.0.0:{}", config.port);
     let listener = tokio::net::TcpListener::bind(&addr).await?;

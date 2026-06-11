@@ -3,6 +3,14 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-11:
+### CORS
+I've just added a powershell script to run the frontend and server with hot reloads. Now that I have api functions to call the server, I can work on getting the two to work together. The first thing I need to do is to set up CORS allowed origins and methods. While I've been able to get away with calling the API directly via Swagger, I now need the API to define what origins can call it and how. 
+
+Setting up CORS was actually really easy with tower_http (although I don't think it's ever particularly hard). I added an allowed origins var to .env, got config to parse that into a Vec<String> of allowed origins, and then used that in app to set up the CORS layer. Hopefully, if I run my frontend and server locally and try out the register request, it will succeed.
+
+It worked! I forgot to add allow_credentials, but once I did I managed to submit a registration request and the API returned a JWT. The next step, then, is to build out the auth provider and make sure the site can keep track of the user being logged in. 
+
 ## 2026-06-10:
 ### RHF
 I had to take a step back today because I realised I kept getting frustrated with the form I was building, and the reason was that I was trying to do too many things at once. I was trying to build a form that was broken down into a page, a form component, and a set of input components while using rhf and zod. Because I didn't know exactly how to execute all these ideas at once, I kept getting frustrated trying to figure out and solve the next issue. 
