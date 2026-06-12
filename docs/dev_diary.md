@@ -3,6 +3,12 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-12:
+### Frontend loose ends
+There are a couple of things that I've had to do that I haven't documented too well. The frontend is starting to look good, or at least usable. Part of me thinks that radix themes was the wrong choice because it's just a bit boring, but I'm sure I can live with it and I have to remind myself that I want to get the UI done as quickly as possible. The registration pages are done, the auth form has been centralised so it's the same for both pages, and I've added a callout element which is just a wrapper on the radix callout (means if I get tired of radix it'll be easy to replace). I also have a minimal nav and some other stuff, idk. 
+
+Next, I want to merge this, get it on vercel, get it deployed along with the server and test it out in the cloud. 
+
 ## 2026-06-11:
 ### CORS
 I've just added a powershell script to run the frontend and server with hot reloads. Now that I have api functions to call the server, I can work on getting the two to work together. The first thing I need to do is to set up CORS allowed origins and methods. While I've been able to get away with calling the API directly via Swagger, I now need the API to define what origins can call it and how. 
