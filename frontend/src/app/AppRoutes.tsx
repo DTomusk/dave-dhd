@@ -3,6 +3,7 @@ import AppLayout from "../layout/AppLayout";
 import HomePage from "../pages/HomePage";
 import RegistrationPage from "../pages/RegistrationPage";
 import ProtectedLayout from "./ProtectedLayout";
+import LoginPage from "../pages/LoginPage";
 
 export const router = createBrowserRouter([
     {
@@ -22,7 +23,14 @@ export const router = createBrowserRouter([
                 children: [{
                     path: "register",
                     element: <RegistrationPage />,
+                },{
+                    path: "login",
+                    element: <LoginPage />,
                 }]
+            },
+            {
+                path: "*",
+                element: <div>Not found</div>,
             }
         ],
     },

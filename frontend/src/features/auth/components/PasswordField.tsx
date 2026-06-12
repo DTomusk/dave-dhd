@@ -13,6 +13,7 @@ export default function PasswordField<
     placeholder,
     rules,
     disabled = false,
+    hint,
 }: FormFieldProps<TFieldValues, TName> & { error?: FieldError }) {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -23,6 +24,7 @@ export default function PasswordField<
             name={name}
             placeholder={placeholder}
             rules={rules}
+            hint={hint}
             type={showPassword ? "text" : "password"}
             disabled={disabled}
             rightSlot={

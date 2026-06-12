@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import type { LoginSchema } from "../features/auth/schemas/loginSchema";
-import { useRegister } from "../features/auth/hooks/useRegister";
 import { useAuth } from "../features/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "../features/auth/hooks/useLogin";
 import AuthForm from "../features/auth/components/AuthForm";
 
-export default function RegistrationPage() {
+export default function LoginPage() {
     const navigate = useNavigate();
     const form = useForm<LoginSchema>();
-    const mutation = useRegister();
+    const mutation = useLogin();
     const { signIn, isAuthenticated } = useAuth();
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export default function RegistrationPage() {
     return (
         <AuthForm
             form={form}
-            action="register"
+            action="login"
             onSubmit={onSubmit}
         />
     )

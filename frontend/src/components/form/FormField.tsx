@@ -17,6 +17,7 @@ export type FormFieldProps<
 
     type?: "text" | "password",
     disabled?: boolean,
+    hint?: string,
 }
 
 export default function FormField<
@@ -31,6 +32,7 @@ export default function FormField<
     type = "text",
     disabled = false,
     rightSlot,
+    hint,
 }: FormFieldProps<TFieldValues, TName>) {
     const {
         field,
@@ -55,6 +57,11 @@ export default function FormField<
             {error && (
                 <Text size="2" color="red">
                     {error.message}
+                </Text>
+            )}
+            {hint && !error && (
+                <Text size="2" color="gray">
+                    {hint}
                 </Text>
             )}
         </Box>
