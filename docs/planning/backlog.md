@@ -2,30 +2,17 @@
 
 ## In progress 
 
-- [ ] Initial GUI with sign in flow
-    - Priority: high
-    - Area: frontend
-    - Type: feature
-    - Why: GUI much more practical than command line curl or swagger UI for accessing API data 
-    - DoD: 
-        - [x] React project set up 
-        - [x]Component library decided on 
-        - [x] Login and registration pages created 
-        - [ ] Site deployed to vercel 
-        - [x] Site can call API endpoints 
-        - [x] Site can store JWT in local storage and send bearer token in API request
-
-## Planning 
-
 - [ ] Brain dump (UI)
     - Priority: high
     - Area: frontend
     - Type: feature
     - Why: this, ideally, should've been done as part of a vertical slice with the backend work, but it doesn't matter too  much at this stage. The user needs to be able to post and access their brain dumps from the site
     - DoD: 
-        - Restricted routes implemented (brain dumps page)
-        - Brain dump input conditionally displayed based on auth status 
-        - Brain dump page retrieves user's brain dumps (paginated)
+        - [x] Restricted routes implemented (brain dumps page)
+        - [ ] Brain dump input conditionally displayed based on auth status 
+        - [ ] Brain dump page retrieves user's brain dumps (paginated)
+
+## Planning 
 
 ## Item template 
 
@@ -37,6 +24,19 @@
     - DoD: 
 
 ## Done
+
+- [x] Initial GUI with sign in flow
+    - Priority: high
+    - Area: frontend
+    - Type: feature
+    - Why: GUI much more practical than command line curl or swagger UI for accessing API data 
+    - DoD: 
+        - [x] React project set up 
+        - [x]Component library decided on 
+        - [x] Login and registration pages created 
+        - [x] Site deployed to vercel 
+        - [x] Site can call API endpoints 
+        - [x] Site can store JWT in local storage and send bearer token in API request
 
 - [x] Brain dump (API)
     - Priority: high 
