@@ -1,6 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { queryClient } from "./queryClient";
 import { clearToken, getToken, setToken } from "../lib/auth/token";
+import { registerUnauthorizedHandler } from "../lib/auth/session";
 
 type AuthContextValue = {
     isAuthenticated: boolean;
@@ -26,6 +27,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         queryClient.clear();
         setIsAuthenticated(false);
     };
+
+    useEffect(() => {
+        registerUnauthorizedHandler(() => {
+            signOut();
+        });
+    }, [signOut]);
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, signIn, signOut }}>

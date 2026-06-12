@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../../app/AuthProvider";
+import { AuthContext } from "../../../app/AuthProvider";
 
 // Hook to access auth context (which includes sign in and sign out functions)
 // If we're not in the auth context, throw an error
