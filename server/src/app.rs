@@ -1,5 +1,5 @@
-use axum::{Router, middleware};
-use tower_http::trace::TraceLayer;
+use axum::{Router, http::{HeaderValue, Method, header::{AUTHORIZATION, CONTENT_TYPE}}, middleware};
+use tower_http::{cors::CorsLayer, trace::TraceLayer};
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 use crate::{
@@ -10,7 +10,24 @@ use crate::{
     }, openapi::ApiDoc
 };
 
-pub fn build(app_state: AppState) -> Router {
+pub fn build(app_state: AppState, allowed_origins: Vec<String>) -> Router {
+    let origins: Vec<HeaderValue> = allowed_origins
+    .iter()
+    .map(|origin| origin.parse().expect("Invalid origin"))
+    .collect();
+
+    let cors = CorsLayer::new()
+        .allow_origin(origins)
+        .allow_methods([
+            Method::GET,
+            Method::POST,
+            Method::PUT,
+            Method::PATCH,
+            Method::DELETE,
+        ])
+        .allow_headers([AUTHORIZATION, CONTENT_TYPE])
+        .allow_credentials(true);
+
     let public = feature::router::public_router()
         .layer(public_rate_limit());
 
@@ -32,6 +49,7 @@ pub fn build(app_state: AppState) -> Router {
             SwaggerUi::new("/docs")
                 .url("/api-docs/openapi.json", ApiDoc::openapi())
         )
+        .layer(cors)
         .layer(TraceLayer::new_for_http())
         .with_state(app_state)
 }

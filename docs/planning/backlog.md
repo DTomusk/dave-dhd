@@ -2,20 +2,20 @@
 
 ## In progress 
 
-## Planning
-
 - [ ] Initial GUI with sign in flow
     - Priority: high
     - Area: frontend
     - Type: feature
     - Why: GUI much more practical than command line curl or swagger UI for accessing API data 
     - DoD: 
-        - React project set up 
-        - Component library decided on 
-        - Login and registration pages created 
-        - Site deployed to vercel 
-        - Site can call API endpoints 
-        - Site can store JWT in js memory (e.g. useState) and send bearer token in API request 
+        - [x] React project set up 
+        - [x]Component library decided on 
+        - [x] Login and registration pages created 
+        - [ ] Site deployed to vercel 
+        - [x] Site can call API endpoints 
+        - [x] Site can store JWT in local storage and send bearer token in API request
+
+## Planning 
 
 - [ ] Brain dump (UI)
     - Priority: high

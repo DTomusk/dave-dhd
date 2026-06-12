@@ -6,6 +6,7 @@ pub struct Config {
     pub database_url: String,
     pub jwt_secret: String,
     pub jwt_expiration_minutes: i64,
+    pub allowed_origins: Vec<String>,
 }
 
 #[derive(Debug)]
@@ -54,6 +55,18 @@ impl Config {
             .map_err(|_| ConfigError::MissingJwtExpirationMinutes)?
             .parse()
             .map_err(|e| ConfigError::InvalidPort(e))?; // reuse InvalidPort error for simplicity
-        Ok(Self { port, database_url, jwt_secret, jwt_expiration_minutes })
+        let allowed_origins = env::var("ALLOWED_ORIGINS")
+            .unwrap_or_else(|_| "".to_string())
+            .split(',')
+            .map(|s| s.trim().to_string())
+            .filter(|s| !s.is_empty())
+            .collect();
+        Ok(Self { 
+            port, 
+            database_url, 
+            jwt_secret, 
+            jwt_expiration_minutes, 
+            allowed_origins,
+        })
     }
 }
