@@ -5,6 +5,8 @@ import { useAuth } from "../features/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../features/auth/hooks/useLogin";
 import AuthForm from "../features/auth/components/AuthForm";
+import Callout from "../components/ui/Callout";
+import { Flex } from "@radix-ui/themes/dist/cjs/components/index.js";
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -19,19 +21,23 @@ export default function LoginPage() {
     }, [isAuthenticated, navigate]);
 
     const onSubmit = async (formData: LoginSchema) => {
-        await mutation.mutateAsync(formData, {
-            onSuccess: async (response) => {
-                await signIn(response.token);
-                navigate("/", { replace: true });
-            }
-        })
+        const response = await mutation.mutateAsync(formData);
+        await signIn(response.token);
+        navigate("/", { replace: true });
     }
     
     return (
-        <AuthForm
-            form={form}
-            action="login"
-            onSubmit={onSubmit}
-        />
+        <Flex direction="column" gap="6">
+            {mutation.isError && (
+                <Callout variant="error"
+                    text={mutation.error.message}
+                />
+            )}
+            <AuthForm
+                form={form}
+                action="login"
+                onSubmit={onSubmit}
+            />
+        </Flex>
     )
 }

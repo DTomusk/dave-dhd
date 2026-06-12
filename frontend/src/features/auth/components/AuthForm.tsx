@@ -20,7 +20,7 @@ export default function AuthForm(
     const actionText = action === "login" ? "Log in" : "Register";
 
     return (
-        <Box maxWidth="400px" width="100%">
+        <Box width="400px">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Card size="4">
                     <Heading as="h3" size="6" trim="start" mb="3">

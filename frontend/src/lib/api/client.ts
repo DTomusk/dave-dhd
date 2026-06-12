@@ -101,5 +101,10 @@ async function handleErrorResponse(response: Response) {
         errorData = { message: errorText || 'An error occurred' };
     }
 
-    throw new ApiError(errorData.message || 'An error occurred', response.status, errorData);
+    const errorMessage =
+        errorData.error ||
+        errorData.message ||
+        'An error occurred';
+
+    throw new ApiError(errorMessage, response.status, errorData);
 }
