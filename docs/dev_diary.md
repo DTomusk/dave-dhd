@@ -10,7 +10,7 @@ Now that the auth stuff is done and merged in and there is a UI, I can start wor
 I've made an incredibly bare-bones solution to start with. The home page has a button that creates brain dumps. They have the same text all the time (because there's no text field yet). The next things I need to do are: 
 - [x] Have a text field for entering brain dumps 
 - [x] Clearing the cache on post so that the first page of brain dumps is refetched
-- A component for displaying brain dumps (including the text and the date created, I don't think I need anything else right now)
+- [x] A component for displaying brain dumps (including the text and the date created, I don't think I need anything else right now)
 - Componentise everything 
 - Create a pagingated page for viewing all brain dumps (no sorting or ordering or filtering at the moment)
 - Figure out width of home page content
@@ -19,6 +19,8 @@ I've made an incredibly bare-bones solution to start with. The home page has a b
 Let's start from the very beginning, a very good place to start. Need to look into radix docs for text fields. Sorry, it should be a text area, not field. 
 
 I've now wired in a text area and invalidated dumps on post so it refetches. 
+
+Programming often stresses me out because I get overwhelmed by the amount of things I need to do. I think the reason for that is because I'm in a rush to get stuff done. In my mind, I want to deliver a feature by a certain time, but the more I think about it, the more things there are to get done, and that quickly becomes stressful. The way I've managed to learn the languages I have is by not worrying about how much there is to learn, but simply to enjoy the process. The brain dump UI might seem like a simple thing in my mind, but there's still a lot to it, and if I let myself think about just how many things there are, then I'll get overwhelmed. I need to just take it one thing at a time and not worry about delivering by a certain date. This isn't work, there are no deadlines, and trying to stick to a deadline is not going to make me go any faster. Quick the contrary really. I just need to work consistently, and eventually I'll have something I can be proud of because I do value producing quality work. When I look at my other projects, I'm impressed by how much I achieved. Even if at the time I didn't think much of what I was doing or was disappointed at my pace. Really, I just need to let myself work and not get in the way of myself. Things will get done when they get done as long as I keep doing things. And, especially in programming, things will inevitably come up that I didn't plan for. Part of that is experience, the more I do stuff, the more I know what to expect, but part of that is just the nature of software. Nothing is ever super easy because everything is endlessly configurable. 
 
 ## 2026-06-12:
 ### Frontend loose ends

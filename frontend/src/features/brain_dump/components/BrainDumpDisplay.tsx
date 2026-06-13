@@ -5,7 +5,7 @@ import FormatDateTime from "../../../lib/date_time";
 export default function BrainDumpDisplay(item: BrainDumpResponse) {
     return (
         <Box>
-            <Flex direction="row">
+            <Flex direction="row" justify="between" align="center">
                 <Text>
                     {item.content}
                 </Text>
