@@ -3,11 +3,30 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-13:
+### Brain dump UI 
+Now that the auth stuff is done and merged in and there is a UI, I can start working on wiring up the brain dump endpoints to the frontend. There are quite a few things that need doing, and if I think about it too much I'm going to get overwhelmed. I just need to pick something and start with that. 
+
+I've made an incredibly bare-bones solution to start with. The home page has a button that creates brain dumps. They have the same text all the time (because there's no text field yet). The next things I need to do are: 
+- Have a text field for entering brain dumps 
+- Clearing the cache on post so that the first page of brain dumps is refetched
+- A component for displaying brain dumps (including the text and the date created, I don't think I need anything else right now)
+- Componentise everything 
+- Create a pagingated page for viewing all brain dumps (no sorting or ordering or filtering at the moment)
+- Figure out width of home page content
+- Add min and max length
+
+Let's start from the very beginning, a very good place to start. Need to look into radix docs for text fields. Sorry, it should be a text area, not field. 
+
 ## 2026-06-12:
 ### Frontend loose ends
 There are a couple of things that I've had to do that I haven't documented too well. The frontend is starting to look good, or at least usable. Part of me thinks that radix themes was the wrong choice because it's just a bit boring, but I'm sure I can live with it and I have to remind myself that I want to get the UI done as quickly as possible. The registration pages are done, the auth form has been centralised so it's the same for both pages, and I've added a callout element which is just a wrapper on the radix callout (means if I get tired of radix it'll be easy to replace). I also have a minimal nav and some other stuff, idk. 
 
 Next, I want to merge this, get it on vercel, get it deployed along with the server and test it out in the cloud. 
+
+I can now register and log into the site in a deployed environment, whoopie! 
+
+I will definitely need refresh tokens relatively soon, but I kind of don't want to do it until it's become really annoying for me without it. 
 
 ## 2026-06-11:
 ### CORS
