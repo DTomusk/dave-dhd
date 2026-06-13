@@ -8,8 +8,8 @@ Note: the days below are in reverse chronological order, but the content within 
 Now that the auth stuff is done and merged in and there is a UI, I can start working on wiring up the brain dump endpoints to the frontend. There are quite a few things that need doing, and if I think about it too much I'm going to get overwhelmed. I just need to pick something and start with that. 
 
 I've made an incredibly bare-bones solution to start with. The home page has a button that creates brain dumps. They have the same text all the time (because there's no text field yet). The next things I need to do are: 
-- Have a text field for entering brain dumps 
-- Clearing the cache on post so that the first page of brain dumps is refetched
+- [x] Have a text field for entering brain dumps 
+- [x] Clearing the cache on post so that the first page of brain dumps is refetched
 - A component for displaying brain dumps (including the text and the date created, I don't think I need anything else right now)
 - Componentise everything 
 - Create a pagingated page for viewing all brain dumps (no sorting or ordering or filtering at the moment)
@@ -17,6 +17,8 @@ I've made an incredibly bare-bones solution to start with. The home page has a b
 - Add min and max length
 
 Let's start from the very beginning, a very good place to start. Need to look into radix docs for text fields. Sorry, it should be a text area, not field. 
+
+I've now wired in a text area and invalidated dumps on post so it refetches. 
 
 ## 2026-06-12:
 ### Frontend loose ends

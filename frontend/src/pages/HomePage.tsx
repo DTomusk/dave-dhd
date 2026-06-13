@@ -1,11 +1,12 @@
-import { Button, Flex, Heading, Text, TextArea } from '@radix-ui/themes'
+import { Button, Flex, Heading, Spinner, TextArea } from '@radix-ui/themes'
 import { usePostDump } from '../features/brain_dump/hooks/usePostDump';
 import { useBrainDumps } from '../features/brain_dump/hooks/useBrainDumps';
 import { useState } from 'react';
+import BrainDumpList from '../features/brain_dump/components/BrainDumpList';
 
 export default function HomePage() {
     const mutation = usePostDump();
-    const { data } = useBrainDumps();
+    const { data, isLoading } = useBrainDumps();
     const [content, setContent] = useState("");
 
     const handleCreateDump = async () => {
@@ -29,11 +30,8 @@ export default function HomePage() {
             <Button onClick={handleCreateDump}>
                 Create Brain Dump
             </Button>
-            {data && data.items.map(dump => (
-                <Text key={dump.id}>
-                    {dump.content}
-                </Text>
-            ))}
+            {isLoading && <Spinner />}
+            {data && <BrainDumpList items={data.items} />}
         </Flex>
     )
 }

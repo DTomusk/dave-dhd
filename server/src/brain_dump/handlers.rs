@@ -70,7 +70,7 @@ pub async fn get_brain_dumps(
     let brain_dump_responses: Vec<BrainDumpResponse> = brain_dumps.into_iter().map(|bd| BrainDumpResponse {
         id: bd.id.to_string(),
         content: bd.content,
-        created_at: bd.created_at.to_string(),
+        created_at: bd.created_at,
     }).collect();
 
     Ok(Json(OffsetPaginationResponse::new(brain_dump_responses, total_count, pagination.offset, pagination.limit)))
