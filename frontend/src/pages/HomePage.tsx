@@ -3,6 +3,7 @@ import { usePostDump } from '../features/brain_dump/hooks/usePostDump';
 import { useBrainDumps } from '../features/brain_dump/hooks/useBrainDumps';
 import { useState } from 'react';
 import BrainDumpList from '../features/brain_dump/components/BrainDumpList';
+import Callout from '../components/ui/Callout';
 
 export default function HomePage() {
     const mutation = usePostDump();
@@ -21,6 +22,11 @@ export default function HomePage() {
             <Heading>
                 What's on your mind?
             </Heading>
+            {mutation.isError && (
+                <Callout variant="error"
+                    text={mutation.error.message}
+                />
+            )}
             <TextArea
                 placeholder="Enter your brain dump"
                 resize="vertical"

@@ -17,6 +17,7 @@ pub struct BrainDumpResponse {
     pub created_at: OffsetDateTime,
 }
 
+// TODO: eventually this will be a helper function in a shared crate
 fn validate_not_blank(content: &str) -> Result<(), ValidationError> {
     if content.trim().is_empty() {
         return Err(ValidationError::new("content cannot be blank"));

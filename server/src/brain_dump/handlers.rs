@@ -8,6 +8,7 @@ use crate::{
     brain_dump::{
         dto::{BrainDumpPostRequest, BrainDumpResponse}, 
         model::{BrainDump, BrainDumpQuery},
+        errors::BrainDumpError,
     }, 
     shared::pagination::dto::{
         OffsetPaginationQuery, 
@@ -31,11 +32,11 @@ pub async fn post_brain_dump(
     State(app_state): State<AppState>,
     AuthUser { id }: AuthUser,
     Json(req): Json<BrainDumpPostRequest>,
-) -> Result<(), String> {
-    let user_id = Uuid::parse_str(&id).map_err(|e| e.to_string())?;
-    req.validate().map_err(|e| e.to_string())?;
+) -> Result<(), BrainDumpError> {
+    let user_id = Uuid::parse_str(&id).map_err(|e| BrainDumpError::ValidationError(e.to_string()))?;
+    req.validate().map_err(|e| BrainDumpError::ValidationError(e.to_string()))?;
     let command = BrainDump::new(user_id, req.content);
-    app_state.brain_dump_service.insert_brain_dump(&command).await.map_err(|e| e.to_string())?;
+    app_state.brain_dump_service.insert_brain_dump(&command).await.map_err(|e| BrainDumpError::DatabaseError(e.to_string()))?;
     Ok(())
 }
 
@@ -56,8 +57,8 @@ pub async fn get_brain_dumps(
     State(app_state): State<AppState>,
     AuthUser { id }: AuthUser,
     Query(req): Query<OffsetPaginationQuery>,
-) -> Result<Json<OffsetPaginationResponse<BrainDumpResponse>>, String> {
-    let user_id = Uuid::parse_str(&id).map_err(|e| e.to_string())?;
+) -> Result<Json<OffsetPaginationResponse<BrainDumpResponse>>, BrainDumpError> {
+    let user_id = Uuid::parse_str(&id).map_err(|e| BrainDumpError::ValidationError(e.to_string()))?;
     // normalise pagination to ensure limit is within bounds
     let pagination = req.normalise();
 
@@ -67,7 +68,7 @@ pub async fn get_brain_dumps(
         limit: pagination.limit,
     };
 
-    let (brain_dumps, total_count) = app_state.brain_dump_service.get_brain_dumps(&query).await.map_err(|e| e.to_string())?;
+    let (brain_dumps, total_count) = app_state.brain_dump_service.get_brain_dumps(&query).await.map_err(|e| BrainDumpError::DatabaseError(e.to_string()))?;
 
     let brain_dump_responses: Vec<BrainDumpResponse> = brain_dumps.into_iter().map(|bd| BrainDumpResponse {
         id: bd.id.to_string(),

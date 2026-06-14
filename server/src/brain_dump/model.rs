@@ -13,7 +13,7 @@ impl BrainDump {
         Self { 
             id: uuid::Uuid::new_v4(), 
             user_id,
-            content,
+            content: content.trim().to_string(),
             created_at: OffsetDateTime::now_utc(),
         }
     }
