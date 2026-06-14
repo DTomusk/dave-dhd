@@ -3,6 +3,14 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-14:
+### More UI 
+Want to do some validation. Let's break it down. 
+
+API validation for length (min and max, min excluding whitespace).
+
+To keep in mind for API validation: need to call validate method in handler, otherwise no validation applied. Need to import validate both in handler and dto. Can define custom validation functions and reference by name.
+
 ## 2026-06-13:
 ### Brain dump UI 
 Now that the auth stuff is done and merged in and there is a UI, I can start working on wiring up the brain dump endpoints to the frontend. There are quite a few things that need doing, and if I think about it too much I'm going to get overwhelmed. I just need to pick something and start with that. 

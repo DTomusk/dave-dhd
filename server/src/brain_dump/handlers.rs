@@ -1,5 +1,6 @@
 use axum::{Json, debug_handler, extract::{Query, State}};
 use uuid::Uuid;
+use validator::Validate;
 
 use crate::{
     app_state::AppState, 
@@ -29,10 +30,11 @@ use crate::{
 pub async fn post_brain_dump(
     State(app_state): State<AppState>,
     AuthUser { id }: AuthUser,
-    Json(request): Json<BrainDumpPostRequest>,
+    Json(req): Json<BrainDumpPostRequest>,
 ) -> Result<(), String> {
     let user_id = Uuid::parse_str(&id).map_err(|e| e.to_string())?;
-    let command = BrainDump::new(user_id, request.content);
+    req.validate().map_err(|e| e.to_string())?;
+    let command = BrainDump::new(user_id, req.content);
     app_state.brain_dump_service.insert_brain_dump(&command).await.map_err(|e| e.to_string())?;
     Ok(())
 }
@@ -53,11 +55,11 @@ pub async fn post_brain_dump(
 pub async fn get_brain_dumps(
     State(app_state): State<AppState>,
     AuthUser { id }: AuthUser,
-    Query(request): Query<OffsetPaginationQuery>,
+    Query(req): Query<OffsetPaginationQuery>,
 ) -> Result<Json<OffsetPaginationResponse<BrainDumpResponse>>, String> {
     let user_id = Uuid::parse_str(&id).map_err(|e| e.to_string())?;
     // normalise pagination to ensure limit is within bounds
-    let pagination = request.normalise();
+    let pagination = req.normalise();
 
     let query = BrainDumpQuery {
         user_id,
