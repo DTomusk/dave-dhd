@@ -1,8 +1,11 @@
 import { Button, Flex, Text } from "@radix-ui/themes";
 import { useAuth } from "../features/auth/hooks/useAuth";
+import Link from "../components/ui/Link";
+import { useNavigate } from "react-router-dom";
 
 export default function Nav() {
     const { isAuthenticated, signOut } = useAuth();
+    const navigate = useNavigate();
     return (
         <header
             style={{
@@ -15,10 +18,15 @@ export default function Nav() {
             }}
         >
             <Flex align="center" justify="between">
-                <Text>DaveDHD</Text>
-                {isAuthenticated && (
-                    <Button onClick={signOut}>Log out</Button>
-                )}
+                <Text onClick={() => navigate("/")}>DaveDHD</Text>
+                <Flex gap="5" align="center">
+                    {isAuthenticated && (
+                        <Link to="/brain-dumps">Brain dumps</Link>
+                    )}
+                    {isAuthenticated && (
+                        <Button onClick={signOut}>Log out</Button>
+                    )}
+                </Flex>
             </Flex>
         </header>
     )

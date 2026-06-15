@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import RegistrationPage from "../pages/RegistrationPage";
 import ProtectedLayout from "./ProtectedLayout";
 import LoginPage from "../pages/LoginPage";
+import BrainDumpPage from "../pages/BrainDumpPage";
 
 export const router = createBrowserRouter([
     {
@@ -11,13 +12,19 @@ export const router = createBrowserRouter([
         element: <AppLayout />,
         children: [
             {
+                // Routes that need auth go here
                 element: <ProtectedLayout />,
                 children: [
-                {
-                    index: true,
-                    element: <HomePage />,
-                }]      
-            },          
+                    {
+                        index: true,
+                        element: <HomePage />,
+                    },
+                    {
+                        path: "brain-dumps",
+                        element: <BrainDumpPage />,
+                    },]      
+            },  
+            // Anonymously accessible routes go here
             {
                 path: "auth",
                 children: [{

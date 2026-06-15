@@ -3,11 +3,48 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-14:
+### More UI 
+Want to do some validation. Let's break it down. 
+
+[x] API validation for length (min and max, min excluding whitespace).
+
+To keep in mind for API validation: need to call validate method in handler, otherwise no validation applied. Need to import validate both in handler and dto. Can define custom validation functions and reference by name.
+
+Need to return specific error responses with error codes in handler function, otherwise errors are returned as 200s. 
+
+Quickly figure out best way to clear input in homepage form. Oh wait, that's really easy, just set content to empty. 
+
+Now want to add client-side validation for dumps that match api. 
+
+## 2026-06-13:
+### Brain dump UI 
+Now that the auth stuff is done and merged in and there is a UI, I can start working on wiring up the brain dump endpoints to the frontend. There are quite a few things that need doing, and if I think about it too much I'm going to get overwhelmed. I just need to pick something and start with that. 
+
+I've made an incredibly bare-bones solution to start with. The home page has a button that creates brain dumps. They have the same text all the time (because there's no text field yet). The next things I need to do are: 
+- [x] Have a text field for entering brain dumps 
+- [x] Clearing the cache on post so that the first page of brain dumps is refetched
+- [x] A component for displaying brain dumps (including the text and the date created, I don't think I need anything else right now)
+- Componentise everything 
+- Create a pagingated page for viewing all brain dumps (no sorting or ordering or filtering at the moment)
+- Figure out width of home page content
+- Add min and max length
+
+Let's start from the very beginning, a very good place to start. Need to look into radix docs for text fields. Sorry, it should be a text area, not field. 
+
+I've now wired in a text area and invalidated dumps on post so it refetches. 
+
+Programming often stresses me out because I get overwhelmed by the amount of things I need to do. I think the reason for that is because I'm in a rush to get stuff done. In my mind, I want to deliver a feature by a certain time, but the more I think about it, the more things there are to get done, and that quickly becomes stressful. The way I've managed to learn the languages I have is by not worrying about how much there is to learn, but simply to enjoy the process. The brain dump UI might seem like a simple thing in my mind, but there's still a lot to it, and if I let myself think about just how many things there are, then I'll get overwhelmed. I need to just take it one thing at a time and not worry about delivering by a certain date. This isn't work, there are no deadlines, and trying to stick to a deadline is not going to make me go any faster. Quick the contrary really. I just need to work consistently, and eventually I'll have something I can be proud of because I do value producing quality work. When I look at my other projects, I'm impressed by how much I achieved. Even if at the time I didn't think much of what I was doing or was disappointed at my pace. Really, I just need to let myself work and not get in the way of myself. Things will get done when they get done as long as I keep doing things. And, especially in programming, things will inevitably come up that I didn't plan for. Part of that is experience, the more I do stuff, the more I know what to expect, but part of that is just the nature of software. Nothing is ever super easy because everything is endlessly configurable. 
+
 ## 2026-06-12:
 ### Frontend loose ends
 There are a couple of things that I've had to do that I haven't documented too well. The frontend is starting to look good, or at least usable. Part of me thinks that radix themes was the wrong choice because it's just a bit boring, but I'm sure I can live with it and I have to remind myself that I want to get the UI done as quickly as possible. The registration pages are done, the auth form has been centralised so it's the same for both pages, and I've added a callout element which is just a wrapper on the radix callout (means if I get tired of radix it'll be easy to replace). I also have a minimal nav and some other stuff, idk. 
 
 Next, I want to merge this, get it on vercel, get it deployed along with the server and test it out in the cloud. 
+
+I can now register and log into the site in a deployed environment, whoopie! 
+
+I will definitely need refresh tokens relatively soon, but I kind of don't want to do it until it's become really annoying for me without it. 
 
 ## 2026-06-11:
 ### CORS
