@@ -9,7 +9,7 @@
     - Why: this, ideally, should've been done as part of a vertical slice with the backend work, but it doesn't matter too  much at this stage. The user needs to be able to post and access their brain dumps from the site
     - DoD: 
         - [x] Restricted routes implemented (brain dumps page)
-        - [ ] Brain dump input conditionally displayed based on auth status 
+        - [x] Brain dump input conditionally displayed based on auth status 
         - [ ] Brain dump page retrieves user's brain dumps (paginated)
 
 ## Planning 
