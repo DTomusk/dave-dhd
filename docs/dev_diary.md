@@ -7,9 +7,15 @@ Note: the days below are in reverse chronological order, but the content within 
 ### More UI 
 Want to do some validation. Let's break it down. 
 
-API validation for length (min and max, min excluding whitespace).
+[x] API validation for length (min and max, min excluding whitespace).
 
 To keep in mind for API validation: need to call validate method in handler, otherwise no validation applied. Need to import validate both in handler and dto. Can define custom validation functions and reference by name.
+
+Need to return specific error responses with error codes in handler function, otherwise errors are returned as 200s. 
+
+Quickly figure out best way to clear input in homepage form. Oh wait, that's really easy, just set content to empty. 
+
+Now want to add client-side validation for dumps that match api. 
 
 ## 2026-06-13:
 ### Brain dump UI 
