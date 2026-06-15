@@ -2,15 +2,12 @@
 
 ## In progress 
 
-- [ ] Brain dump (UI)
+- [ ] React native app
     - Priority: high
-    - Area: frontend
+    - Area: app
     - Type: feature
-    - Why: this, ideally, should've been done as part of a vertical slice with the backend work, but it doesn't matter too  much at this stage. The user needs to be able to post and access their brain dumps from the site
+    - Why: I've been using the site on my phone, and it feels like an app would be nicer
     - DoD: 
-        - [x] Restricted routes implemented (brain dumps page)
-        - [x] Brain dump input conditionally displayed based on auth status 
-        - [ ] Brain dump page retrieves user's brain dumps (paginated)
 
 ## Planning 
 
@@ -24,6 +21,17 @@
     - DoD: 
 
 ## Done
+
+- [x] Brain dump (UI)
+    - Priority: high
+    - Area: frontend
+    - Type: feature
+    - Why: this, ideally, should've been done as part of a vertical slice with the backend work, but it doesn't matter too  much at this stage. The user needs to be able to post and access their brain dumps from the site
+    - DoD: 
+        - [x] Restricted routes implemented (brain dumps page)
+        - [x] Brain dump input conditionally displayed based on auth status 
+        - [x] Brain dump page retrieves user's brain dumps (paginated)
+
 
 - [x] Initial GUI with sign in flow
     - Priority: high
