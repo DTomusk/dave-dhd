@@ -1,4 +1,4 @@
-import { Box, Text, TextArea } from "@radix-ui/themes";
+import { Box, Flex, Text, TextArea } from "@radix-ui/themes";
 import FormFieldLabel from "./FormFieldLabel";
 import { useController, type Control, type FieldPath, type FieldValues, type RegisterOptions } from "react-hook-form";
 import type { ComponentPropsWithoutRef } from "react";
@@ -21,6 +21,7 @@ export type FormTextAreaProps<
 
     disabled?: boolean,
     hint?: string,
+    maxLength?: number,
 } & NativeTextAreaProps;
 
 export default function FormTextArea<
@@ -33,6 +34,7 @@ export default function FormTextArea<
     rules,
     disabled = false,
     hint,
+    maxLength,
     ...textAreaProps
 }: FormTextAreaProps<TFieldValues, TName>) {
     const {
@@ -49,9 +51,15 @@ export default function FormTextArea<
                 disabled={disabled}
                 color={error ? "red" : undefined}
             />
+            <Flex justify="end" mt="1" gap="2">
             {error && (
                 <Text size="2" color="red">
                     {error.message}
+                </Text>
+            )}
+            {maxLength && (
+                <Text size="2" color="gray">
+                    {field.value?.length ?? 0}/{maxLength}
                 </Text>
             )}
             {hint && !error && (
@@ -59,6 +67,7 @@ export default function FormTextArea<
                     {hint}
                 </Text>
             )}
+            </Flex>
         </Box>
     );
 }
