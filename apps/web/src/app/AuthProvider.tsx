@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { queryClient } from "./queryClient";
-import { clearToken, getToken, setToken } from "../lib/auth/token";
 import { registerUnauthorizedHandler } from "../lib/auth/session";
+import { getTokenStore } from "../lib/auth/token-store";
 
 type AuthContextValue = {
     isAuthenticated: boolean;
@@ -13,17 +13,17 @@ export const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-        () => getToken() !== null
+        () => getTokenStore().getToken() !== null
     );
 
     const signIn = (token: string) => {
-        setToken(token);
+        getTokenStore().setToken(token);
         setIsAuthenticated(true);
         void queryClient.invalidateQueries({ refetchType: "active" });
     };
 
     const signOut = () => {
-        clearToken();
+        getTokenStore().clearToken();
         queryClient.clear();
         setIsAuthenticated(false);
     };

@@ -1,3 +1,5 @@
+import type { TokenStore } from "./token-store";
+
 const JWT_TOKEN_KEY = "jwt";
 
 export function getToken(): string | null {
@@ -11,3 +13,10 @@ export function setToken(token: string): void {
 export function clearToken(): void {
     localStorage.removeItem(JWT_TOKEN_KEY);
 }
+
+// Web implementation of TokenStore using localStorage
+export const localStorageTokenStore: TokenStore = {
+    getToken,
+    setToken,
+    clearToken,
+};
