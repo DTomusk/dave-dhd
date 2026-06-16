@@ -1,4 +1,4 @@
-import type { BrainDumpResponse } from "../types";
+import type { BrainDumpResponse } from "@davedhd/features/brain_dump/types";
 import BrainDumpDisplay from "./BrainDumpDisplay";
 import { Box, Separator } from "@radix-ui/themes";
 

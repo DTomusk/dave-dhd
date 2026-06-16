@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from "@radix-ui/themes";
-import type { BrainDumpResponse } from "../types";
+import type { BrainDumpResponse } from "@davedhd/features/brain_dump/types";
 import FormatDateTime from "@davedhd/lib/date-time";
 
 export default function BrainDumpDisplay(item: BrainDumpResponse) {

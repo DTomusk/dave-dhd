@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import Pagination from "../components/ui/Pagination";
 import { Container, Flex, Heading, Spinner } from "@radix-ui/themes";
 import BrainDumpList from "../features/brain_dump/components/BrainDumpList";
-import { useBrainDumps } from "../features/brain_dump/hooks/useBrainDumps";
+import { useBrainDumps } from "@davedhd/features/brain_dump/hooks/useBrainDumps";
 import BackLink from "../components/ui/BackLink";
 
 export default function BrainDumpPage() {

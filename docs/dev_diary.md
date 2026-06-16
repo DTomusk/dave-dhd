@@ -3,6 +3,20 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-16:
+### pnpm workspaces
+I want to write about this now because I'm afraid I'm going to forget about it and it took some figuring out. 
+
+What I'm working on at the moment is splitting out any non-react specific stuff in the web into a separate package that can eventually be referenced by the react native app. The idea is that these two apps should depend on the same code as much as possible, although I'm not fussed if they don't look exactly the same. Things like hooks, apis, types etc. should all be identical, and pnpm workspaces is a way to make that happen. 
+
+At the very root of the project I've added a package.json file. This means the entire repo is a package. The package.json file is very minimal. Firstly, it sets the package to private. Secondly, it defines a couple of useful scripts (for running the web and the app). Otherwise, it contains some other less important metadata. 
+
+The important new file is pnpm-workspace.yaml. This defines what packages are in the workspace. We've put apps/* and packages/*. This means that any packages in those two directories are included in the workspace. server has been left out because it only contains rust server code. 
+
+At the point of writing, I've created two packages in `./packages`. For now, they mirror the structure that they had in web. I might keep it like this, but it might be better to restructure later down the line. I've done it like this for now because I believe in just making one decision at a time, otherwise things become complicated, overwhelming and hard to track. All I wanted was a proof of concept that I could import one thing from a private package I'd defined myself in my monorepo. 
+
+So, each directory in packages includes a package.json file which defines everything that package exports as well as the package name. That's how we determine what to reference when importing the package in web. However, to import a package like this, we also have to add it as a dependency in the web's package.json. 
+
 ## 2026-06-14:
 ### More UI 
 Want to do some validation. Let's break it down. 

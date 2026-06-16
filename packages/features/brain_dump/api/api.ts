@@ -1,5 +1,5 @@
-import { api } from "@davedhd/lib/api/api";
-import type { PaginatedRequest, PaginatedResponse } from "@davedhd/lib/types";
+import { api } from "../../../lib/api/api";
+import type { PaginatedRequest, PaginatedResponse } from "../../../lib/types";
 import type { BrainDumpResponse } from "../types";
 
 export function getBrainDump(input: PaginatedRequest) {
