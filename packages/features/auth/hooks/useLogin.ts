@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../api/login";
 import type { LoginRequest, LoginResponse } from "../types";
-import type { ApiError } from "../../../lib/api/error";
+import type { ApiError } from "@davedhd/lib/api/error";
 
 export function useLogin() {
     return useMutation<

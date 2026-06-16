@@ -4,7 +4,7 @@ import { useBrainDumps } from '@davedhd/features/brain_dump/hooks/useBrainDumps'
 import BrainDumpList from '../features/brain_dump/components/BrainDumpList';
 import Callout from '../components/ui/Callout';
 import { useForm } from 'react-hook-form';
-import type { BrainDumpSchema } from '../../../../packages/features/brain_dump/schemas/brainDumpSchema';
+import type { BrainDumpSchema } from '@davedhd/features/brain_dump/schemas/brainDumpSchema';
 import DumpPostForm from '../features/brain_dump/components/DumpPostForm';
 
 export default function HomePage() {

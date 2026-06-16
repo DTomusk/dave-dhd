@@ -1,4 +1,4 @@
-import type { TokenStore } from "../../../../../packages/lib/auth/token-store";
+import type { TokenStore } from "@davedhd/lib/auth/token-store";
 
 const JWT_TOKEN_KEY = "jwt";
 

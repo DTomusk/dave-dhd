@@ -1,4 +1,4 @@
-import { api } from "../../../lib/api/api";
+import { api } from "@davedhd/lib/api/api";
 import type { RegistrationRequest, RegistrationResponse } from "../types";
 
 // TODO: get rid of JSON.stringify
