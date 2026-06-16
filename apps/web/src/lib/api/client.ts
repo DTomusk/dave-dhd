@@ -2,7 +2,13 @@ import { handleUnauthorized } from "../auth/session";
 import { getTokenStore } from "../auth/token-store";
 import { ApiError } from "./error";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+let _baseUrl: string | undefined;
+
+export function initApiClient(baseUrl: string) {
+    const trimmed = baseUrl?.trim();
+    if (!trimmed) throw new Error("API base URL must be provided");
+    _baseUrl = trimmed;
+}
 
 // This function should be called for all API requests
 export async function apiFetch<T>(
@@ -47,7 +53,11 @@ async function sendRequest(
         ? JSON.stringify(options.body)
         : options.body;
 
-    return fetch(`${API_BASE_URL}${endpoint}`, {
+    if (!_baseUrl) {
+        throw new Error("API base URL is not initialized");
+    }
+
+    return fetch(`${_baseUrl}${endpoint}`, {
         ...options,
         headers,
         body,
