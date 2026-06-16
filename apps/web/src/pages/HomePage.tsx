@@ -1,11 +1,11 @@
 import { Container, Flex, Heading, Spinner } from '@radix-ui/themes'
 import { usePostDump } from '@davedhd/features/brain_dump/hooks/usePostDump';
 import { useBrainDumps } from '@davedhd/features/brain_dump/hooks/useBrainDumps';
-import BrainDumpList from '../features/brain_dump/components/BrainDumpList';
+import BrainDumpList from '../components/brain_dump/BrainDumpList';
 import Callout from '../components/ui/Callout';
 import { useForm } from 'react-hook-form';
 import type { BrainDumpSchema } from '@davedhd/features/brain_dump/schemas/brainDumpSchema';
-import DumpPostForm from '../features/brain_dump/components/DumpPostForm';
+import DumpPostForm from '../components/brain_dump/DumpPostForm';
 
 export default function HomePage() {
     const mutation = usePostDump();

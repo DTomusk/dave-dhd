@@ -6,8 +6,10 @@
   "exports": {
     "./auth/api/login": "./auth/api/login.ts",
     "./auth/api/register": "./auth/api/register.ts",
+    "./auth/hooks/useAuth": "./auth/hooks/useAuth.ts",
     "./auth/hooks/useLogin": "./auth/hooks/useLogin.ts",
     "./auth/hooks/useRegister": "./auth/hooks/useRegister.ts",
+    "./auth/providers/AuthProvider": "./auth/providers/AuthProvider.tsx",
     "./auth/types": "./auth/types.ts",
     "./auth/schemas/loginSchema": "./auth/schemas/loginSchema.ts",
     "./brain_dump/api/api": "./brain_dump/api/api.ts",
@@ -17,8 +19,12 @@
     "./brain_dump/types": "./brain_dump/types.ts"
   },
   "dependencies": {
-    "zod": "^4.4.3",
+    "@davedhd/lib": "workspace:*",
     "@tanstack/react-query": "^5.101.0",
-    "@davedhd/lib": "workspace:*"
+    "react": "^19.2.7",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17"
   }
 }

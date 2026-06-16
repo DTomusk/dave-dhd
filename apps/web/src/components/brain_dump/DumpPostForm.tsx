@@ -1,5 +1,5 @@
 import { Button } from "@radix-ui/themes";
-import FormTextArea from "../../../components/form/FormTextArea";
+import FormTextArea from "../form/FormTextArea";
 import type { UseFormReturn } from "react-hook-form";
 import type { BrainDumpSchema } from "@davedhd/features/brain_dump/schemas/brainDumpSchema";
 

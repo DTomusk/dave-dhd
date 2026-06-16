@@ -1,7 +1,7 @@
 import { IconButton } from "@radix-ui/themes";
 import { useState } from "react";
 import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
-import FormField, { type FormFieldProps } from "../../../components/form/FormField";
+import FormField, { type FormFieldProps } from "../form/FormField";
 import type { FieldError, FieldPath, FieldValues } from "react-hook-form";
 
 export default function PasswordField<

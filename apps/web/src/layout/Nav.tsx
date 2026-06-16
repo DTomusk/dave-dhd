@@ -1,5 +1,5 @@
 import { Button, Flex, Text } from "@radix-ui/themes";
-import { useAuth } from "../features/auth/hooks/useAuth";
+import { useAuth } from "@davedhd/features/auth/hooks/useAuth";
 import Link from "../components/ui/Link";
 import { useNavigate } from "react-router-dom";
 

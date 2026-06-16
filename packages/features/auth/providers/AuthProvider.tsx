@@ -1,7 +1,7 @@
-import { createContext, useEffect, useState } from "react";
-import { queryClient } from "./queryClient";
 import { registerUnauthorizedHandler } from "@davedhd/lib/auth/session";
 import { getTokenStore } from "@davedhd/lib/auth/token-store";
+import { useQueryClient } from "@tanstack/react-query";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 type AuthContextValue = {
     isAuthenticated: boolean;
@@ -12,26 +12,28 @@ type AuthContextValue = {
 export const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+    const queryClient = useQueryClient();
+    
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
         () => getTokenStore().getToken() !== null
     );
 
-    const signIn = (token: string) => {
+    // useCallback ensures that the signIn and signOut functions are memoized and do not change on every render
+    // they don't change often
+    const signIn = useCallback((token: string) => {
         getTokenStore().setToken(token);
         setIsAuthenticated(true);
         void queryClient.invalidateQueries({ refetchType: "active" });
-    };
+    }, [queryClient]);
 
-    const signOut = () => {
+    const signOut = useCallback(() => {
         getTokenStore().clearToken();
         queryClient.clear();
         setIsAuthenticated(false);
-    };
+    }, [queryClient]);
 
     useEffect(() => {
-        registerUnauthorizedHandler(() => {
-            signOut();
-        });
+        registerUnauthorizedHandler(signOut);
     }, [signOut]);
 
     return (
