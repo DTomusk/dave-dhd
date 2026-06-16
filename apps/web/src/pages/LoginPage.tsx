@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import type { LoginSchema } from "../features/auth/schemas/loginSchema";
+import type { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";
 import { useAuth } from "../features/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { useLogin } from "../features/auth/hooks/useLogin";
 import AuthForm from "../features/auth/components/AuthForm";
 import Callout from "../components/ui/Callout";
 import { Flex } from "@radix-ui/themes/dist/cjs/components/index.js";
+import { useLogin } from "@davedhd/features/auth/hooks/useLogin";
 
 export default function LoginPage() {
     const navigate = useNavigate();

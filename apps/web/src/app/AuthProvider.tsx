@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { queryClient } from "./queryClient";
-import { registerUnauthorizedHandler } from "../lib/auth/session";
-import { getTokenStore } from "../lib/auth/token-store";
+import { registerUnauthorizedHandler } from "@davedhd/lib/auth/session";
+import { getTokenStore } from "@davedhd/lib/auth/token-store";
 
 type AuthContextValue = {
     isAuthenticated: boolean;

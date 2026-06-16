@@ -101,6 +101,12 @@ importers:
 
   apps/web:
     dependencies:
+      '@davedhd/features':
+        specifier: workspace:*
+        version: link:../../packages/features
+      '@davedhd/lib':
+        specifier: workspace:*
+        version: link:../../packages/lib
       '@hookform/resolvers':
         specifier: ^5.4.0
         version: 5.4.0(react-hook-form@7.79.0(react@19.2.7))
@@ -183,6 +189,14 @@ importers:
       vite:
         specifier: ^8.0.12
         version: 8.0.16(@types/node@24.13.2)(terser@5.48.0)(yaml@2.9.0)
+
+  packages/features:
+    dependencies:
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
+
+  packages/lib: {}
 
 packages:
 

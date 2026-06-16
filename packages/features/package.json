@@ -1,0 +1,17 @@
+{
+  "name": "@davedhd/features",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./auth/api/login": "./auth/api/login.ts",
+    "./auth/api/register": "./auth/api/register.ts",
+    "./auth/hooks/useLogin": "./auth/hooks/useLogin.ts",
+    "./auth/hooks/useRegister": "./auth/hooks/useRegister.ts",
+    "./auth/types": "./auth/types.ts",
+    "./auth/schemas/loginSchema": "./auth/schemas/loginSchema.ts"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  }
+}

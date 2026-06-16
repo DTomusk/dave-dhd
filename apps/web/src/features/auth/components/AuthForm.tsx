@@ -1,9 +1,9 @@
 import { Box, Button, Card, Flex, Heading, Text } from "@radix-ui/themes";
 import FormField from "../../../components/form/FormField";
 import PasswordField from "./PasswordField";
-import type { LoginSchema } from "../schemas/loginSchema";
+import type { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";
 import type { UseFormReturn } from "react-hook-form";
-import type { AuthAction } from "../types";
+import type { AuthAction } from "@davedhd/features/auth/types";
 import Link from "../../../components/ui/Link";
 
 type AuthFormProps = {

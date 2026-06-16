@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import type { LoginSchema } from "../features/auth/schemas/loginSchema";
-import { useRegister } from "../features/auth/hooks/useRegister";
+import type { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";
+import { useRegister } from "@davedhd/features/auth/hooks/useRegister";
 import { useAuth } from "../features/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../features/auth/components/AuthForm";
