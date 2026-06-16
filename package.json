@@ -1,0 +1,14 @@
+{
+  "name": "dave-dhd",
+  "private": true,
+  "packageManager": "pnpm@11.7.0",
+  "version": "1.0.0",
+  "description": "It should come as no surprise to strangers on the internet that I have ADHD. This is a site to help manage that.",
+  "scripts": {
+    "dev:web": "pnpm --filter web dev",
+    "dev:native": "pnpm --filter native start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
