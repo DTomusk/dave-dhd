@@ -1,0 +1,30 @@
+{
+  "name": "@davedhd/features",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./auth/api/login": "./auth/api/login.ts",
+    "./auth/api/register": "./auth/api/register.ts",
+    "./auth/hooks/useAuth": "./auth/hooks/useAuth.ts",
+    "./auth/hooks/useLogin": "./auth/hooks/useLogin.ts",
+    "./auth/hooks/useRegister": "./auth/hooks/useRegister.ts",
+    "./auth/providers/AuthProvider": "./auth/providers/AuthProvider.tsx",
+    "./auth/types": "./auth/types.ts",
+    "./auth/schemas/loginSchema": "./auth/schemas/loginSchema.ts",
+    "./brain_dump/api/api": "./brain_dump/api/api.ts",
+    "./brain_dump/hooks/useBrainDumps": "./brain_dump/hooks/useBrainDumps.ts",
+    "./brain_dump/hooks/usePostDump": "./brain_dump/hooks/usePostDump.ts",
+    "./brain_dump/schemas/brainDumpSchema": "./brain_dump/schemas/brainDumpSchema.ts",
+    "./brain_dump/types": "./brain_dump/types.ts"
+  },
+  "dependencies": {
+    "@davedhd/lib": "workspace:*",
+    "@tanstack/react-query": "^5.101.0",
+    "react": "^19.2.7",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17"
+  }
+}
