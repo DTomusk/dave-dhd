@@ -3,6 +3,12 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-17: 
+### Native parity 
+I've now extracted everything I can from the vite react site into a shared packages workspace so that the upcoming react native app can reference it as well. What I want to do now is to reach feature parity across the app and the site, but that's going to take a little bit of doing and I won't see the results until after some work. This is compounded by the fact that I've never made a react native app before, so all of this is new to me, although I imagine it will be quite straightforward because it's still react, it's more about how I translate UI components than anything else. 
+
+To start with, I'm going to build the registration form in the index file with no wiring. Then I can do a couple of things: componentise elements (including the form so it can be reused for login), wire up API, add styling. I also would like to extract strings at some point, because the app and the site should show the exact same string content (at least in most cases I imagine).
+
 ## 2026-06-16:
 ### pnpm workspaces
 I want to write about this now because I'm afraid I'm going to forget about it and it took some figuring out. 
