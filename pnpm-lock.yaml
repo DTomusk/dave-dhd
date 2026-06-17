@@ -209,7 +209,11 @@ importers:
         specifier: ^19.2.17
         version: 19.2.17
 
-  packages/lib: {}
+  packages/lib:
+    dependencies:
+      '@tanstack/react-query':
+        specifier: ^5.101.0
+        version: 5.101.0(react@19.2.7)
 
 packages:
 

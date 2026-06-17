@@ -2,9 +2,10 @@ import { RouterProvider } from "react-router-dom"
 import { router } from "./app/AppRoutes"
 import "@radix-ui/themes/styles.css"
 import { QueryClientProvider } from "@tanstack/react-query"
-import { queryClient } from "./app/queryClient"
-import { AuthProvider } from "./app/AuthProvider"
+import { AuthProvider } from "@davedhd/features/auth/providers/AuthProvider"
+import { createQueryClient } from "@davedhd/lib/api/queryClient"
 
+const queryClient = createQueryClient();
 
 function App() {
   return (
