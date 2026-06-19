@@ -1,5 +1,5 @@
 import { styles } from "@/theme";
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import NativeFormField from "../form/NativeFormField";
 import { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";
 import { UseFormReturn } from "react-hook-form";
