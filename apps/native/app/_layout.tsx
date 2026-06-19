@@ -1,5 +1,21 @@
 import { Stack } from "expo-router";
+import { createQueryClient } from "@davedhd/lib/api/queryClient"
+import { initTokenStore } from '@davedhd/lib/auth/token-store'
+import { initApiClient } from '@davedhd/lib/api/client'
+import { QueryClientProvider } from "@tanstack/react-query"
+import { AuthProvider } from "@davedhd/features/auth/providers/AuthProvider"
+import { memoryTokenStore } from "@/lib/token";
+
+const queryClient = createQueryClient();
+initTokenStore(memoryTokenStore);
+initApiClient(process.env.EXPO_PUBLIC_API_URL ?? "");
 
 export default function RootLayout() {
-  return <Stack />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Stack />
+      </AuthProvider>
+    </QueryClientProvider>
+  );
 }

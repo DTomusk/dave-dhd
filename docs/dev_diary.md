@@ -28,6 +28,9 @@ So, each directory in packages includes a package.json file which defines everyt
 ### Native form
 I'm very excited because I'm starting to get the hang of react native development (or at least so I think, I know there's a lot more for me to learn). I've successfully implemented the same registration form I have in the web using RHF in native. Currently, all it does is log that the form has been submitted, but that's good enough for me now. I've created a components directory that is broken down into a couple of other folders. Basically, it seems I'm ready to wire up some more stuff, including the API and token storage. 
 
+### API
+I'm ready to start calling the api from my native app. The bootstrapping is pretty much identical to the web, I just need to initialise my query client and token store differently because they're platform dependent. 
+
 ## 2026-06-14:
 ### More UI 
 Want to do some validation. Let's break it down. 
