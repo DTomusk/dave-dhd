@@ -6,7 +6,7 @@
   "description": "It should come as no surprise to strangers on the internet that I have ADHD. This is a site to help manage that.",
   "scripts": {
     "dev:web": "pnpm --filter web dev",
-    "dev:native": "pnpm --filter native start"
+    "dev:native": "set EXPO_NO_DEPENDENCY_VALIDATION=1&& pnpm --filter native start"
   },
   "keywords": [],
   "author": "",

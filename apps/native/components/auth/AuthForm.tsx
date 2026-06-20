@@ -55,7 +55,7 @@ export default function AuthForm({ form, action, onSubmit }: AuthFormProps) {
             <Button
                 title={action === "login" ? "Register" : "Log in"}
                 onPress={() => {
-                    router.push(action === "login" ? "/(auth)/register" : "/(auth)/login");
+                    router.replace(action === "login" ? "/(auth)/register" : "/(auth)/login");
                 }}
                 variant="secondary"
             />
