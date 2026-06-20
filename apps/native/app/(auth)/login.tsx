@@ -27,7 +27,7 @@ export default function Login() {
       onSuccess: async (response) => {
         await signIn(response.token);
         form.reset();
-        router.replace("/");
+        router.push("/");
       },
       onError: (error) => {
         console.error(error);
