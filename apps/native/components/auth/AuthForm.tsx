@@ -5,6 +5,7 @@ import { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";
 import { UseFormReturn } from "react-hook-form";
 import type { AuthAction } from "@davedhd/features/auth/types";
 import Button from "../ui/Button";
+import { useRouter } from "expo-router";
 
 
 type AuthFormProps = {
@@ -15,6 +16,7 @@ type AuthFormProps = {
 
 export default function AuthForm({ form, action, onSubmit }: AuthFormProps) {
     const { handleSubmit, control } = form;
+    const router = useRouter();
 
     const actionText = action === "login" ? "Log in" : "Register";
 
@@ -52,7 +54,9 @@ export default function AuthForm({ form, action, onSubmit }: AuthFormProps) {
             />
             <Button
                 title={action === "login" ? "Register" : "Log in"}
-                onPress={() => {}}
+                onPress={() => {
+                    router.replace(action === "login" ? "/(auth)/register" : "/(auth)/login");
+                }}
                 variant="secondary"
             />
         </View>

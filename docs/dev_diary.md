@@ -3,6 +3,21 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-20
+### Node packages 
+It's funny how I never really understood node packages until a couple of days ago, and I want to take a moment to consolidate my understanding before moving on to other stuff. 
+
+Basically, any directory with a package.json file is a package. For the package to be useable by another package, it has to export at least something (it also has to have a name). A lock file is a special file that captures all the exact versions of packages that are needed. Running `pnpm install` regenerates the lock file. A lock file can help ensure that there aren't any version conflicts. 
+
+I was running into an issue earlier where my features package was installing react 19.2.7 or something like that, but the native app was using 19.1.0. This meant that when the native app tried calling a hook in the package, there was a version conflict. I've decided to use the react version in the native app as the version of react in the project. This should make it easier to keep versions in sync. The annoying thing is that the native app is on sdk 54 rather than 56 (the current one), which means that the packages aren't quite up-to-date. I decided to go with 54 because that has expo go support, which makes testing a lot easier (I don't have to queue a build in the cloud). Hopefully, newer versions of expo will have expo go support. I find it a bit annoying that they describe the expo go versions as "for educations", because it seems online that there are plenty of real teams that want expo go support. But that's neither here nor there. 
+
+A package manager is responsible for adding and installing packages. Examples include pnpm, npm and yarn. I don't know much about yarn. I used to use npm at work until someone recommended pnpm, and pnpm is what I use now. My understanding is that npm installs each dependency for each package (these are stored in the node modules directory of a package). This can be really inefficient if lots of packages depend on the same packages. pnpm, however, installs only one of each dependency package by doing some kind of magic. 
+
+Anyway, for diagnosing version mismatches in the future, I can always take a look at the actual files in my node modules directories and figure out where the version mismatch is coming from. 
+
+### Expo routing 
+Now that my registration form works and logs you in, it's time to start building out more of the site to get parity with web. Expo uses file-based routing (a bit like next.js), so files and directories define the route tree. Layout files (_layout.tsx) aren't routes in and of themselves, but rather define a layout for a route group. For example, I've created a (protected) route group, and the layout for that checks whether a user is authenticated and reroutes them if they aren't. The root layout file defines the app initialisation (like App.tsx in react). This is where DI etc. is done. For example, this is where the local storage and api endpoints are injected in this project and the providers are set up.
+
 ## 2026-06-17: 
 ### Native parity 
 I've now extracted everything I can from the vite react site into a shared packages workspace so that the upcoming react native app can reference it as well. What I want to do now is to reach feature parity across the app and the site, but that's going to take a little bit of doing and I won't see the results until after some work. This is compounded by the fact that I've never made a react native app before, so all of this is new to me, although I imagine it will be quite straightforward because it's still react, it's more about how I translate UI components than anything else. 
