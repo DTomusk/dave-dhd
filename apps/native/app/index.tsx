@@ -1,11 +1,15 @@
 import { 
-  KeyboardAvoidingView, 
+  KeyboardAvoidingView,
+  View, 
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";
 import { useForm } from "react-hook-form";
 import AuthForm from "@/components/auth/AuthForm";
 import { styles } from "@/theme";
+import { useRegister } from "@davedhd/features/auth/hooks/useRegister";
+import { useAuth } from "@davedhd/features/auth/hooks/useAuth";
+import Callout from "@/components/ui/Callout";
 
 export default function Index() {
   const form = useForm<LoginSchema>({
@@ -14,10 +18,20 @@ export default function Index() {
       password: "",
     },
   });
+
+  const mutation = useRegister();
+  const { signIn } = useAuth();
+
   const onSubmit = async (formData: LoginSchema) => {
-    // Handle form submission logic here
-    console.log("Form submitted:", formData);
-    form.reset(); // Reset the form after submission
+    mutation.mutate(formData, {
+      onSuccess: async (response) => {
+        await signIn(response.token);
+        form.reset();
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    });
   }
 
   return (
@@ -29,6 +43,13 @@ export default function Index() {
         behavior="padding"
         style={styles.keyboard}
       >
+          {mutation.isError && (
+            <View style={{ marginBottom: 16 }}>
+              <Callout variant="error" 
+                text={mutation.error.message ?? "An error occurred"} 
+              />
+            </View>
+          )}
           <AuthForm
             form={form}
             action="register"
