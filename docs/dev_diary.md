@@ -18,6 +18,11 @@ Anyway, for diagnosing version mismatches in the future, I can always take a loo
 ### Expo routing 
 Now that my registration form works and logs you in, it's time to start building out more of the site to get parity with web. Expo uses file-based routing (a bit like next.js), so files and directories define the route tree. Layout files (_layout.tsx) aren't routes in and of themselves, but rather define a layout for a route group. For example, I've created a (protected) route group, and the layout for that checks whether a user is authenticated and reroutes them if they aren't. The root layout file defines the app initialisation (like App.tsx in react). This is where DI etc. is done. For example, this is where the local storage and api endpoints are injected in this project and the providers are set up.
 
+### UI design 
+There's a lot that I need to learn about react native apps, so I can't expect that I'll build this app super quickly. I should, however, take this learning time to ask questions as and when they pop up so I don't end up writing code that I don't understand and that doesn't scale well. 
+
+For SafeAreaView and KeyboardAvoidingView, these should be applied on a case-by-case basis. It's not a lot of code to wrap a component in them, and that gives you more fine-grained control over the layout. Applying them globally means less available area in general and less flexibility. Case-by-case means I can experiment with omitting them without affecting how anything else looks. 
+
 ## 2026-06-17: 
 ### Native parity 
 I've now extracted everything I can from the vite react site into a shared packages workspace so that the upcoming react native app can reference it as well. What I want to do now is to reach feature parity across the app and the site, but that's going to take a little bit of doing and I won't see the results until after some work. This is compounded by the fact that I've never made a react native app before, so all of this is new to me, although I imagine it will be quite straightforward because it's still react, it's more about how I translate UI components than anything else. 
