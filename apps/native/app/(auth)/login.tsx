@@ -36,16 +36,16 @@ export default function Login() {
   return (
     <>
         {mutation.isError && (
-        <View style={{ marginBottom: 16 }}>
-            <Callout variant="error" 
-            text={mutation.error.message ?? "An error occurred"} 
-            />
-        </View>
+          <View style={{ marginBottom: 16 }}>
+              <Callout variant="error" 
+              text={mutation.error.message ?? "An error occurred"} 
+              />
+          </View>
         )}
         <AuthForm
-        form={form}
-        action="login"
-        onSubmit={onSubmit}
+          form={form}
+          action="login"
+          onSubmit={onSubmit}
         />
     </>
   );

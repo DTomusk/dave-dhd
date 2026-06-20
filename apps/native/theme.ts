@@ -10,8 +10,10 @@ export const colors = {
   primaryPressed: "#000000",
   primaryText: "#ffffff",
   secondaryText: "#111111",
-  danger: "#ff4d4f",
+  danger: "#b42318",
+  dangerBg: "#fef3f2",
   dangerText: "#ffffff",
+  dangerBorder: "#fecdca",
 };
 
 export const spacing = {
@@ -106,8 +108,10 @@ export const styles = StyleSheet.create({
     color: colors.secondaryText,
   },
   error: {
-    fontSize: 12,
+    fontSize: 13,
     color: colors.danger,
+    lineHeight: 18,
+    fontWeight: "500",
   },
   placeholder: {
     color: colors.textMuted,
@@ -115,12 +119,20 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
     padding: spacing.lg,
+    gap: spacing.md,
+    backgroundColor: colors.bg,
   },
   subtitle: {
     fontSize: 18,
     color: colors.textMuted,
     textAlign: "center",
   },
+  errorContainer: {
+    backgroundColor: colors.dangerBg,
+    padding: spacing.md,
+    borderRadius: radius.md,
+    borderColor: colors.dangerBorder,
+    borderWidth: 1,
+  }
 });

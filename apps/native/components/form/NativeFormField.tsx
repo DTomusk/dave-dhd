@@ -14,6 +14,7 @@ type NativeFormFieldProps<
     secureTextEntry?: boolean;
     hint?: string;
     autoCapitalize?: "none" | "sentences" | "words" | "characters";
+    numberOfLines?: number;
 };
 
 export default function NativeFormField<
@@ -28,6 +29,7 @@ export default function NativeFormField<
     secureTextEntry,
     hint,
     autoCapitalize = "none",
+    numberOfLines = 1,
 }: NativeFormFieldProps<TFieldValues, TName>) {
     const { field, fieldState: { error } } = useController({ control, name, rules });
 
@@ -37,20 +39,24 @@ export default function NativeFormField<
             {hint && <Text style={styles.hint}>{hint}</Text>}
             <View style={styles.field}>
                 <TextInput
-                style={styles.input}
-                placeholder={placeholder}
-                placeholderTextColor={styles.placeholder.color}
-                autoCapitalize={autoCapitalize}
-                secureTextEntry={secureTextEntry}
-                value={String(field.value ?? "")}
-                onChangeText={field.onChange}
-                onBlur={field.onBlur}
+                    style={styles.input}
+                    placeholder={placeholder}
+                    placeholderTextColor={styles.placeholder.color}
+                    autoCapitalize={autoCapitalize}
+                    secureTextEntry={secureTextEntry}
+                    value={String(field.value ?? "")}
+                    onChangeText={field.onChange}
+                    onBlur={field.onBlur}
+                    multiline={numberOfLines > 1}
+                    numberOfLines={numberOfLines}
                 />
             </View>
             {error && (
-                <Text style={styles.error}>
-                    {error.message}
-                </Text>
+                <View style={styles.errorContainer}>
+                    <Text style={styles.error}>
+                        {error.message}
+                    </Text>
+                </View>
             )}      
         </View>
     )
