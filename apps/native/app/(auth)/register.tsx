@@ -1,23 +1,23 @@
-import { 
-  KeyboardAvoidingView,
-  View, 
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";
-import { useForm } from "react-hook-form";
 import AuthForm from "@/components/auth/AuthForm";
-import { styles } from "@/theme";
-import { useRegister } from "@davedhd/features/auth/hooks/useRegister";
-import { useAuth } from "@davedhd/features/auth/hooks/useAuth";
 import Callout from "@/components/ui/Callout";
+import { styles } from "@/theme";
+import { useAuth } from "@davedhd/features/auth/hooks/useAuth";
+import { useRegister } from "@davedhd/features/auth/hooks/useRegister";
+import { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";
+import { useRouter } from "expo-router";
+import { useForm } from "react-hook-form";
+import { KeyboardAvoidingView, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Index() {
-  const form = useForm<LoginSchema>({
+export default function Register() {
+    const form = useForm<LoginSchema>({
     defaultValues: {
       username: "",
       password: "",
     },
   });
+
+  const router = useRouter();
 
   const mutation = useRegister();
   const { signIn } = useAuth();
@@ -27,6 +27,7 @@ export default function Index() {
       onSuccess: async (response) => {
         await signIn(response.token);
         form.reset();
+        router.replace("/");
       },
       onError: (error) => {
         console.error(error);

@@ -112,4 +112,15 @@ export const styles = StyleSheet.create({
   placeholder: {
     color: colors.textMuted,
   },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: spacing.lg,
+  },
+  subtitle: {
+    fontSize: 18,
+    color: colors.textMuted,
+    textAlign: "center",
+  },
 });
