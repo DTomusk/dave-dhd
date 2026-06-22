@@ -1,11 +1,13 @@
 import NativeFormField from "@/components/form/NativeFormField";
 import { styles } from "@/theme/theme";
-import { KeyboardAvoidingView, Text, View } from "react-native";
+import { KeyboardAvoidingView } from "react-native";
 import { usePostDump } from '@davedhd/features/brain_dump/hooks/usePostDump';
 import { useForm } from "react-hook-form";
 import type { BrainDumpSchema } from '@davedhd/features/brain_dump/schemas/brainDumpSchema';
 import Button from "@/components/ui/Button";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Container from "@/components/layout/Container";
+import Title from "@/components/ui/Title";
 
 export default function Index() {
     const mutation = usePostDump();
@@ -22,8 +24,8 @@ export default function Index() {
             behavior="padding"
             style={styles.keyboard}
         >
-            <View style={styles.container}>
-                <Text style={styles.title}>What's on your mind?</Text>
+            <Container>
+                <Title text="What's on your mind?" />
                 <NativeFormField
                     placeholder="Enter your brain dump"
                     name="content"
@@ -38,7 +40,7 @@ export default function Index() {
                     numberOfLines={4}
                 />
                 <Button title="Submit" onPress={form.handleSubmit(handleCreateDump)} />
-            </View>
+            </Container>
         </KeyboardAvoidingView>
     </SafeAreaView>
   );

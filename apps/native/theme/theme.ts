@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+// Design tokens
 export const colors = {
   bg: "#f4f0eb",
   surface: "#ffffff",
@@ -37,62 +38,5 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: spacing.lg,
-  },
-  card: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.lg,
-    padding: spacing.lg,
-    gap: spacing.md,
-    shadowColor: "#000",
-    shadowOpacity: 0.08,
-    shadowRadius: 18,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 4,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "700",
-    color: colors.text,
-  },
-  helper: {
-    fontSize: 14,
-    color: colors.textMuted,
-  },
-  field: {
-    gap: spacing.sm,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: colors.text,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radius.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    fontSize: 16,
-    color: colors.text,
-    backgroundColor: colors.surface,
-  },
-  hint: {
-    fontSize: 12,
-    color: colors.textMuted,
-  },
-  placeholder: {
-    color: colors.textMuted,
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: spacing.lg,
-    gap: spacing.md,
-    backgroundColor: colors.bg,
-  },
-  subtitle: {
-    fontSize: 18,
-    color: colors.textMuted,
-    textAlign: "center",
   },
 });

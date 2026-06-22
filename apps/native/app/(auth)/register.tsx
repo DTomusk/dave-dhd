@@ -1,13 +1,11 @@
 import AuthForm from "@/components/auth/AuthForm";
 import Callout from "@/components/ui/Callout";
-import { styles } from "@/theme/theme";
 import { useAuth } from "@davedhd/features/auth/hooks/useAuth";
 import { useRegister } from "@davedhd/features/auth/hooks/useRegister";
 import { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";
 import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
-import { KeyboardAvoidingView, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
 
 export default function Register() {
     const form = useForm<LoginSchema>({

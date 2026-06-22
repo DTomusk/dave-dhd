@@ -1,7 +1,9 @@
-import { styles } from "@/theme/theme";
 import { Control, FieldPath, FieldValues, RegisterOptions, useController } from "react-hook-form";
-import { Text, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import InputError from "./InputError";
+import { colors, radius, spacing } from "@/theme/theme";
+import Label from "./Label";
+import Hint from "./Hint";
 
 type NativeFormFieldProps<
     TFieldValues extends FieldValues,
@@ -36,9 +38,9 @@ export default function NativeFormField<
 
     return (
         <View style={styles.field}>
-            {label && <Text style={styles.label}>{label}</Text>}
-            {hint && <Text style={styles.hint}>{hint}</Text>}
-            <View style={styles.field}>
+            {label && <Label text={label} />}
+            {hint && <Hint text={hint} />}
+            <View>
                 <TextInput
                     style={styles.input}
                     placeholder={placeholder}
@@ -58,3 +60,22 @@ export default function NativeFormField<
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    input: {
+        borderWidth: 1,
+        borderColor: colors.border,
+        borderRadius: radius.md,
+        paddingHorizontal: spacing.md,
+        paddingVertical: spacing.sm,
+        fontSize: 16,
+        color: colors.text,
+        backgroundColor: colors.surface,
+    },
+    placeholder: {
+        color: colors.textMuted,
+    },
+    field: {
+        gap: spacing.sm,
+    },
+})

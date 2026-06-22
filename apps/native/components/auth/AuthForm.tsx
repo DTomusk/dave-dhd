@@ -1,11 +1,11 @@
-import { styles } from "@/theme/theme";
-import { Text, View } from "react-native";
 import NativeFormField from "../form/NativeFormField";
 import { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";
 import { UseFormReturn } from "react-hook-form";
 import type { AuthAction } from "@davedhd/features/auth/types";
 import Button from "../ui/Button";
 import { useRouter } from "expo-router";
+import Card from "../layout/Card";
+import Title from "../ui/Title";
 
 
 type AuthFormProps = {
@@ -21,8 +21,8 @@ export default function AuthForm({ form, action, onSubmit }: AuthFormProps) {
     const actionText = action === "login" ? "Log in" : "Register";
 
     return (
-        <View style={styles.card}>
-            <Text style={styles.title}>{actionText}</Text>
+        <Card>
+            <Title text={actionText} />
             <NativeFormField
                 control={control}
                 name="username"
@@ -59,6 +59,6 @@ export default function AuthForm({ form, action, onSubmit }: AuthFormProps) {
                 }}
                 variant="secondary"
             />
-        </View>
+        </Card>
     )
 }
