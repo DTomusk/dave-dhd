@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import { radius, spacing } from "@/theme";
+import { radius, spacing } from "@/theme/theme";
 
 type CalloutProps = {
   variant?: "info" | "warning" | "error" | "success";

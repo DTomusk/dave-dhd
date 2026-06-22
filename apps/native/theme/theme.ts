@@ -80,39 +80,6 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.textMuted,
   },
-  buttonBase: {
-    marginTop: spacing.sm,
-    backgroundColor: colors.primary,
-    borderRadius: radius.md,
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: 48,
-    paddingVertical: spacing.md,
-  },
-  buttonPrimary: {
-    backgroundColor: colors.primary,
-  },
-  buttonSecondary: {
-    backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: colors.border,
-  },
-  buttonTextBase: {
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  buttonTextPrimary: {
-    color: colors.primaryText,
-  },
-  buttonTextSecondary: {
-    color: colors.secondaryText,
-  },
-  error: {
-    fontSize: 13,
-    color: colors.danger,
-    lineHeight: 18,
-    fontWeight: "500",
-  },
   placeholder: {
     color: colors.textMuted,
   },
@@ -128,11 +95,4 @@ export const styles = StyleSheet.create({
     color: colors.textMuted,
     textAlign: "center",
   },
-  errorContainer: {
-    backgroundColor: colors.dangerBg,
-    padding: spacing.md,
-    borderRadius: radius.md,
-    borderColor: colors.dangerBorder,
-    borderWidth: 1,
-  }
 });

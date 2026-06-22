@@ -1,4 +1,4 @@
-import { styles } from "@/theme";
+import { styles } from "@/theme/theme";
 import { Text, View } from "react-native";
 import NativeFormField from "../form/NativeFormField";
 import { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";

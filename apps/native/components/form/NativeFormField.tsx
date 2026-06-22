@@ -1,6 +1,7 @@
-import { styles } from "@/theme";
+import { styles } from "@/theme/theme";
 import { Control, FieldPath, FieldValues, RegisterOptions, useController } from "react-hook-form";
 import { Text, TextInput, View } from "react-native";
+import InputError from "./InputError";
 
 type NativeFormFieldProps<
     TFieldValues extends FieldValues,
@@ -52,11 +53,7 @@ export default function NativeFormField<
                 />
             </View>
             {error && (
-                <View style={styles.errorContainer}>
-                    <Text style={styles.error}>
-                        {error.message}
-                    </Text>
-                </View>
+                <InputError message={error.message ?? "Unknown error"} />
             )}      
         </View>
     )

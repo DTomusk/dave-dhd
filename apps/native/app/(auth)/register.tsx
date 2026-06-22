@@ -1,6 +1,6 @@
 import AuthForm from "@/components/auth/AuthForm";
 import Callout from "@/components/ui/Callout";
-import { styles } from "@/theme";
+import { styles } from "@/theme/theme";
 import { useAuth } from "@davedhd/features/auth/hooks/useAuth";
 import { useRegister } from "@davedhd/features/auth/hooks/useRegister";
 import { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";

@@ -1,4 +1,4 @@
-import { styles } from "@/theme";
+import { styles } from "@/theme/theme";
 import { Slot } from "expo-router";
 import { KeyboardAvoidingView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
