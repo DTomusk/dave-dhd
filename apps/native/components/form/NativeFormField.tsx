@@ -4,6 +4,7 @@ import InputError from "./InputError";
 import { colors, radius, spacing } from "@/theme/theme";
 import Label from "./Label";
 import Hint from "./Hint";
+import { useState } from "react";
 
 type NativeFormFieldProps<
     TFieldValues extends FieldValues,
@@ -17,8 +18,13 @@ type NativeFormFieldProps<
     secureTextEntry?: boolean;
     hint?: string;
     autoCapitalize?: "none" | "sentences" | "words" | "characters";
+    // Initial number of lines to display. If greater than 1, the input will be multiline.
     numberOfLines?: number;
+    // If true and numberOfLines is greater than 1, the input will expand to fit the content up to a maximum height.
+    expandable?: boolean;
 };
+
+const MAX_HEIGHT = 200;
 
 export default function NativeFormField<
     TFieldValues extends FieldValues,
@@ -33,8 +39,11 @@ export default function NativeFormField<
     hint,
     autoCapitalize = "none",
     numberOfLines = 1,
+    expandable = false,
 }: NativeFormFieldProps<TFieldValues, TName>) {
     const { field, fieldState: { error } } = useController({ control, name, rules });
+    const minHeight = 40 * numberOfLines; // Minimum height based on number of lines
+    const [height, setHeight] = useState(minHeight); // Initial height based on number of lines
 
     return (
         <View style={styles.field}>
@@ -42,7 +51,7 @@ export default function NativeFormField<
             {hint && <Hint text={hint} />}
             <View>
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input, expandable && { height }]}
                     placeholder={placeholder}
                     placeholderTextColor={styles.placeholder.color}
                     autoCapitalize={autoCapitalize}
@@ -52,6 +61,13 @@ export default function NativeFormField<
                     onBlur={field.onBlur}
                     multiline={numberOfLines > 1}
                     numberOfLines={numberOfLines}
+                    scrollEnabled={height > MAX_HEIGHT}
+                    onContentSizeChange={(event) => {
+                        if (expandable) {
+                            const newHeight = Math.max(minHeight, event.nativeEvent.contentSize.height);
+                            setHeight(Math.min(newHeight, MAX_HEIGHT));
+                        }
+                    }}
                 />
             </View>
             {error && (

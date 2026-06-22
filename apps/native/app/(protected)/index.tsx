@@ -54,6 +54,7 @@ export default function Index() {
                     }
                     }}
                     numberOfLines={4}
+                    expandable
                 />
                 <Button title="Submit" onPress={form.handleSubmit(handleCreateDump)} />
             </Container>
