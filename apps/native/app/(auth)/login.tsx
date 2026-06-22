@@ -38,7 +38,8 @@ export default function Login() {
         {mutation.isError && (
           <View style={{ marginBottom: 16 }}>
               <Callout variant="error" 
-              text={mutation.error.message ?? "An error occurred"} 
+                text={mutation.error.message ?? "An error occurred"} 
+                dismissable
               />
           </View>
         )}

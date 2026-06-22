@@ -14,6 +14,11 @@ I've decided to quickly make some changes to the callout component. It now:
 
 But maybe I should be focusing more on the functionality than on these little UI tweaks. Although, it was useful adding the callout for brain dump post errors and success.
 
+### Testing on a real device 
+Until now, I've been testing the app in browser just so I can get everything set up quickly and see changes instantly. Now that I'm in a place where I can call the api and post stuff to the database, I've decided it's time to focus on getting this running on a real device so I can start simulating what using it in real life would be like. 
+
+The only real hurdle to this was the .env variable. Before, the api address was localhost, but localhost on mobile refers to the device itself, rather than my laptop where my server is running. So, I just ran `ipconfig` in commandline and replaced localhost with the address there. Now I can connect to my api via my phone, log in and post stuff, which makes me feel quite accomplished. I have my database running in docker, my server is on my laptop talking to the database, and my phone is talking to my server. 
+
 ## 2026-06-20
 ### Node packages 
 It's funny how I never really understood node packages until a couple of days ago, and I want to take a moment to consolidate my understanding before moving on to other stuff. 

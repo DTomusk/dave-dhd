@@ -37,8 +37,10 @@ export default function Register() {
     <>
         {mutation.isError && (
         <View style={{ marginBottom: 16 }}>
-            <Callout variant="error" 
-            text={mutation.error.message ?? "An error occurred"} 
+            <Callout 
+              variant="error" 
+              text={mutation.error.message ?? "An error occurred"} 
+              dismissable
             />
         </View>
         )}
