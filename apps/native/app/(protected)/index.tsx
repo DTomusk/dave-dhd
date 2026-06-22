@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Container from "@/components/layout/Container";
 import Title from "@/components/ui/Title";
+import Callout from "@/components/ui/Callout";
 
 export default function Index() {
     const mutation = usePostDump();
@@ -25,6 +26,21 @@ export default function Index() {
             style={styles.keyboard}
         >
             <Container>
+                {mutation.isError && (
+                    <Callout 
+                        variant="error" 
+                        text="Error creating brain dump. Please try again." 
+                        dismissable
+                    />
+                )}
+                {mutation.isSuccess && (
+                    <Callout 
+                        disappearAfter={2500} 
+                        fadeLength={500} 
+                        variant="success" 
+                        text="Brain dump created successfully!" 
+                    />
+                )}
                 <Title text="What's on your mind?" />
                 <NativeFormField
                     placeholder="Enter your brain dump"
