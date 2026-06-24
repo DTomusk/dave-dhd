@@ -3,6 +3,10 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-24
+### Brain dump listing 
+The last thing to get feature parity between web and app is brain dump listing. 
+
 ## 2026-06-22
 ### Componentisation 
 Originally, I had all my styles in one stylesheet in my theme.ts file. Once I started adding more components, I realised that this would quickly become a very long style sheet that would be annoying to work with. So, I've taken a bit of time to create a bunch of really simple components and define their style in the same file as the component themselves. This has meant that I've been able to delete a bunch of stuff from the theme file. That now mainly contains design tokens like colours, but no component specific styles. Which means, if I have a problem with a component, I can easily find both the markdown and the style for it in one place, and I only ever have to change it in one place. My approach is to have style sheets only on the most basic components, and then components which compose a bunch of other components won't have any special styling of their own (unless really necessary). 

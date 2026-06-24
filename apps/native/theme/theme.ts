@@ -36,7 +36,6 @@ export const styles = StyleSheet.create({
   },
   keyboard: {
     flex: 1,
-    justifyContent: "center",
     padding: spacing.lg,
   },
 });

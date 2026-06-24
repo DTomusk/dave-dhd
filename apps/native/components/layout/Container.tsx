@@ -12,7 +12,7 @@ export default function Container({ children }: { children: React.ReactNode }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "flex-start",
         padding: spacing.lg,
         gap: spacing.md,
         backgroundColor: colors.bg,
