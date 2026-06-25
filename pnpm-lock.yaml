@@ -218,8 +218,8 @@ importers:
         version: 4.4.3
     devDependencies:
       '@types/react':
-        specifier: 19.1.0
-        version: 19.1.0
+        specifier: 19.1.17
+        version: 19.1.17
 
   packages/lib:
     dependencies:
@@ -2084,9 +2084,6 @@ packages:
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
     peerDependencies:
       '@types/react': ^19.2.0
-
-  '@types/react@19.1.0':
-    resolution: {integrity: sha512-UaicktuQI+9UKyA4njtDOGBD/67t8YEBt2xdfqu8+gP9hqPUPsiXlNPcpS2gVdjmis5GKPG3fCxbQLVgxsQZ8w==}
 
   '@types/react@19.1.17':
     resolution: {integrity: sha512-Qec1E3mhALmaspIrhWt9jkQMNdw6bReVu64mjvhbhq2NFPftLPVr+l1SZgmw/66WwBNpDh7ao5AT6gF5v41PFA==}
@@ -7530,10 +7527,6 @@ snapshots:
   '@types/react-dom@19.2.3(@types/react@19.1.17)':
     dependencies:
       '@types/react': 19.1.17
-
-  '@types/react@19.1.0':
-    dependencies:
-      csstype: 3.2.3
 
   '@types/react@19.1.17':
     dependencies:

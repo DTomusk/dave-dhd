@@ -11,5 +11,6 @@ export default function ProtectedLayout() {
     return (<Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="brain_dumps/index" options={{ title: "Brain Dumps" }} />
+        <Stack.Screen name="brain_dumps/[id]" options={{ title: "" }} />
     </Stack>);
 }
