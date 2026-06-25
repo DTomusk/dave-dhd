@@ -3,14 +3,14 @@ import { ActivityIndicator, KeyboardAvoidingView, ScrollView, View } from "react
 import { SafeAreaView } from "react-native-safe-area-context";
 import Container from "@/components/layout/Container";
 import BrainDumpForm from "@/components/brain_dump/BrainDumpForm";
-import BrainDumpList from "@/components/brain_dump/BrainDumpList";
-import { useBrainDumps } from "@davedhd/features/brain_dump/hooks/useBrainDumps";
+import { usePagedDumps } from "@davedhd/features/brain_dump/hooks/useBrainDumps";
 import Title from "@/components/ui/Title";
 import Button from "@/components/ui/Button";
 import { useRouter } from "expo-router";
+import BrainDumpDisplay from "@/components/brain_dump/BrainDumpDisplay";
 
 export default function Index() {
-    const { data, isLoading } = useBrainDumps(0, 3);
+    const { data, isLoading } = usePagedDumps(0, 3);
     const router = useRouter();
     
     return (
@@ -28,7 +28,9 @@ export default function Index() {
                     <View style={{ height: 40 }} />
                     <Title text="Latest Dumps" />
                     {isLoading && <ActivityIndicator />}
-                    {!isLoading && <BrainDumpList items={data?.items || []} />}
+                    {!isLoading && data?.items.map(dump => (
+                        <BrainDumpDisplay key={dump.id} {...dump} />
+                    ))}
                     <Button title="View All" onPress={() => router.push("/brain_dumps")} />
                 </Container>
             </ScrollView>
