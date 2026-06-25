@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import Pagination from "../components/ui/Pagination";
 import { Container, Flex, Heading, Spinner } from "@radix-ui/themes";
 import BrainDumpList from "../components/brain_dump/BrainDumpList";
-import { useBrainDumps } from "@davedhd/features/brain_dump/hooks/useBrainDumps";
+import { usePagedDumps } from "@davedhd/features/brain_dump/hooks/useBrainDumps";
 import BackLink from "../components/ui/BackLink";
 
 export default function BrainDumpPage() {
@@ -13,7 +13,7 @@ export default function BrainDumpPage() {
 
     const offset = page * perPage;
 
-    const { data, isLoading } = useBrainDumps(offset, perPage);
+    const { data, isLoading } = usePagedDumps(offset, perPage);
     const totalPages = data ? Math.ceil(data.total / perPage) : 0;
 
     // TODO: this page should have the latest brain dumps in it 

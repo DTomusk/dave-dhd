@@ -3,6 +3,54 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-24
+### Brain dump listing 
+The last thing to get feature parity between web and app is brain dump listing. 
+
+## 2026-06-22
+### Componentisation 
+Originally, I had all my styles in one stylesheet in my theme.ts file. Once I started adding more components, I realised that this would quickly become a very long style sheet that would be annoying to work with. So, I've taken a bit of time to create a bunch of really simple components and define their style in the same file as the component themselves. This has meant that I've been able to delete a bunch of stuff from the theme file. That now mainly contains design tokens like colours, but no component specific styles. Which means, if I have a problem with a component, I can easily find both the markdown and the style for it in one place, and I only ever have to change it in one place. My approach is to have style sheets only on the most basic components, and then components which compose a bunch of other components won't have any special styling of their own (unless really necessary). 
+
+### Callout 
+I've decided to quickly make some changes to the callout component. It now: 
+- Can be dismissed with the close icon 
+- Can be set to fade 
+
+But maybe I should be focusing more on the functionality than on these little UI tweaks. Although, it was useful adding the callout for brain dump post errors and success.
+
+### Testing on a real device 
+Until now, I've been testing the app in browser just so I can get everything set up quickly and see changes instantly. Now that I'm in a place where I can call the api and post stuff to the database, I've decided it's time to focus on getting this running on a real device so I can start simulating what using it in real life would be like. 
+
+The only real hurdle to this was the .env variable. Before, the api address was localhost, but localhost on mobile refers to the device itself, rather than my laptop where my server is running. So, I just ran `ipconfig` in commandline and replaced localhost with the address there. Now I can connect to my api via my phone, log in and post stuff, which makes me feel quite accomplished. I have my database running in docker, my server is on my laptop talking to the database, and my phone is talking to my server. 
+
+## 2026-06-20
+### Node packages 
+It's funny how I never really understood node packages until a couple of days ago, and I want to take a moment to consolidate my understanding before moving on to other stuff. 
+
+Basically, any directory with a package.json file is a package. For the package to be useable by another package, it has to export at least something (it also has to have a name). A lock file is a special file that captures all the exact versions of packages that are needed. Running `pnpm install` regenerates the lock file. A lock file can help ensure that there aren't any version conflicts. 
+
+I was running into an issue earlier where my features package was installing react 19.2.7 or something like that, but the native app was using 19.1.0. This meant that when the native app tried calling a hook in the package, there was a version conflict. I've decided to use the react version in the native app as the version of react in the project. This should make it easier to keep versions in sync. The annoying thing is that the native app is on sdk 54 rather than 56 (the current one), which means that the packages aren't quite up-to-date. I decided to go with 54 because that has expo go support, which makes testing a lot easier (I don't have to queue a build in the cloud). Hopefully, newer versions of expo will have expo go support. I find it a bit annoying that they describe the expo go versions as "for educations", because it seems online that there are plenty of real teams that want expo go support. But that's neither here nor there. 
+
+A package manager is responsible for adding and installing packages. Examples include pnpm, npm and yarn. I don't know much about yarn. I used to use npm at work until someone recommended pnpm, and pnpm is what I use now. My understanding is that npm installs each dependency for each package (these are stored in the node modules directory of a package). This can be really inefficient if lots of packages depend on the same packages. pnpm, however, installs only one of each dependency package by doing some kind of magic. 
+
+Anyway, for diagnosing version mismatches in the future, I can always take a look at the actual files in my node modules directories and figure out where the version mismatch is coming from. 
+
+### Expo routing 
+Now that my registration form works and logs you in, it's time to start building out more of the site to get parity with web. Expo uses file-based routing (a bit like next.js), so files and directories define the route tree. Layout files (_layout.tsx) aren't routes in and of themselves, but rather define a layout for a route group. For example, I've created a (protected) route group, and the layout for that checks whether a user is authenticated and reroutes them if they aren't. The root layout file defines the app initialisation (like App.tsx in react). This is where DI etc. is done. For example, this is where the local storage and api endpoints are injected in this project and the providers are set up.
+
+### UI design 
+There's a lot that I need to learn about react native apps, so I can't expect that I'll build this app super quickly. I should, however, take this learning time to ask questions as and when they pop up so I don't end up writing code that I don't understand and that doesn't scale well. 
+
+For SafeAreaView and KeyboardAvoidingView, these should be applied on a case-by-case basis. It's not a lot of code to wrap a component in them, and that gives you more fine-grained control over the layout. Applying them globally means less available area in general and less flexibility. Case-by-case means I can experiment with omitting them without affecting how anything else looks. 
+
+## 2026-06-17: 
+### Native parity 
+I've now extracted everything I can from the vite react site into a shared packages workspace so that the upcoming react native app can reference it as well. What I want to do now is to reach feature parity across the app and the site, but that's going to take a little bit of doing and I won't see the results until after some work. This is compounded by the fact that I've never made a react native app before, so all of this is new to me, although I imagine it will be quite straightforward because it's still react, it's more about how I translate UI components than anything else. 
+
+To start with, I'm going to build the registration form in the index file with no wiring. Then I can do a couple of things: componentise elements (including the form so it can be reused for login), wire up API, add styling. I also would like to extract strings at some point, because the app and the site should show the exact same string content (at least in most cases I imagine).
+
+Dependency installs should be done using pnpm in the repo root, not anywhere else. `--filter` can be used to specify whether something's for native or web. I was using npm in the native app, but I don't want to do that. I want to keep everything consistently pnpm, so I should manage everything via the root and not install things inside the packages themselves. 
+
 ## 2026-06-16:
 ### pnpm workspaces
 I want to write about this now because I'm afraid I'm going to forget about it and it took some figuring out. 
@@ -16,6 +64,12 @@ The important new file is pnpm-workspace.yaml. This defines what packages are in
 At the point of writing, I've created two packages in `./packages`. For now, they mirror the structure that they had in web. I might keep it like this, but it might be better to restructure later down the line. I've done it like this for now because I believe in just making one decision at a time, otherwise things become complicated, overwhelming and hard to track. All I wanted was a proof of concept that I could import one thing from a private package I'd defined myself in my monorepo. 
 
 So, each directory in packages includes a package.json file which defines everything that package exports as well as the package name. That's how we determine what to reference when importing the package in web. However, to import a package like this, we also have to add it as a dependency in the web's package.json. 
+
+### Native form
+I'm very excited because I'm starting to get the hang of react native development (or at least so I think, I know there's a lot more for me to learn). I've successfully implemented the same registration form I have in the web using RHF in native. Currently, all it does is log that the form has been submitted, but that's good enough for me now. I've created a components directory that is broken down into a couple of other folders. Basically, it seems I'm ready to wire up some more stuff, including the API and token storage. 
+
+### API
+I'm ready to start calling the api from my native app. The bootstrapping is pretty much identical to the web, I just need to initialise my query client and token store differently because they're platform dependent. 
 
 ## 2026-06-14:
 ### More UI 
