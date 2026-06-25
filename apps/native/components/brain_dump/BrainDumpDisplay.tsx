@@ -6,8 +6,8 @@ import { Text } from "react-native";
 export default function BrainDumpDisplay(item: BrainDumpResponse) {
     return (
         <Card>
-            <Text>{item.content}</Text>
             <Text>{FormatDateTime(item.created_at)}</Text>
+            <Text>{item.content}</Text>
         </Card>
     )
 }

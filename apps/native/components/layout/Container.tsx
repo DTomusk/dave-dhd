@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "flex-start",
         padding: spacing.lg,
-        gap: spacing.md,
+        gap: spacing.lg,
         backgroundColor: colors.bg,
     },
 });
