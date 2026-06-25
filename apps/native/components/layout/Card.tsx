@@ -1,7 +1,20 @@
 import { colors, radius, spacing } from "@/theme/theme";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 
-export default function Card({ children }: { children: React.ReactNode }) {
+type CardProps = {
+    children: React.ReactNode;
+    onPress?: () => void;
+};
+
+export default function Card({ children, onPress }: CardProps) {
+    if (onPress) {
+        return (
+            <Pressable style={styles.card} onPress={onPress}>
+                {children}
+            </Pressable>
+        );
+    }
+    
     return (
         <View style={styles.card}>
             {children}
