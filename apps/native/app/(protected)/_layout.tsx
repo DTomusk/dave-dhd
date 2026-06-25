@@ -1,5 +1,5 @@
 import { useAuth } from "@davedhd/features/auth/hooks/useAuth";
-import { Redirect, Slot } from "expo-router";
+import { Redirect, Slot, Stack } from "expo-router";
 
 export default function ProtectedLayout() {
     const { isAuthenticated } = useAuth();
@@ -8,5 +8,8 @@ export default function ProtectedLayout() {
         return <Redirect href="/auth/login" />;
     }
 
-    return <Slot />;
+    return (<Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="brain_dumps/index" options={{ title: "Brain Dumps" }} />
+    </Stack>);
 }
