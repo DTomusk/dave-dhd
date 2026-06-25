@@ -15,23 +15,23 @@ export default function Index() {
     
     return (
         <SafeAreaView style={styles.screen}>
-            <KeyboardAvoidingView
-                behavior="padding"
-                style={styles.keyboard}
+            <ScrollView
+                contentContainerStyle={{ flexGrow: 1 }}
             >
-                <ScrollView
-                    contentContainerStyle={{ flexGrow: 1 }}
-                >
-                    <Container>
+                <Container>
+                    <KeyboardAvoidingView
+                        behavior="padding"
+                        style={styles.keyboard}
+                    >
                         <BrainDumpForm/>
-                        <View style={{ height: 40 }} />
-                        <Title text="Latest Dumps" />
-                        {isLoading && <ActivityIndicator />}
-                        {!isLoading && <BrainDumpList items={data?.items || []} />}
-                        <Button title="View All" onPress={() => router.push("/brain_dumps")} />
-                    </Container>
-                </ScrollView>
-            </KeyboardAvoidingView>
+                    </KeyboardAvoidingView>
+                    <View style={{ height: 40 }} />
+                    <Title text="Latest Dumps" />
+                    {isLoading && <ActivityIndicator />}
+                    {!isLoading && <BrainDumpList items={data?.items || []} />}
+                    <Button title="View All" onPress={() => router.push("/brain_dumps")} />
+                </Container>
+            </ScrollView>
         </SafeAreaView>
   ) ;
 }
