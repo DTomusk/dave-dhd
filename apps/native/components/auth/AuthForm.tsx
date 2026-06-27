@@ -59,6 +59,7 @@ export default function AuthForm({ form, action, onSubmit }: AuthFormProps) {
                     router.replace(action === "login" ? "/auth/register" : "/auth/login");
                 }}
                 variant="secondary"
+                disabled={formState.isSubmitting}
             />
         </Card>
     )

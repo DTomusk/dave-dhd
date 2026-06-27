@@ -27,6 +27,7 @@ export default function Index() {
                             fetchNextPage();
                         }
                     }}
+                    removeClippedSubviews={false}
                     onEndReachedThreshold={0.5}
                     ListFooterComponent={isFetchingNextPage ? <ActivityIndicator /> : null}
                     ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
