@@ -3,6 +3,20 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-26
+### App deployment 
+Right now, the absolute most important thing for me is to get the app on my phone so I can start using it day-to-day. Until I've done that, I have no evidence of whether the thing I've built is useful or not. 
+
+My plan is to try some pain driven development. I'm not going to actively be planning any development work, rather, I'm going to be building features as things start to annoy me. For example, I can imagine that I'm going to get annoyed at having to sign in all the time, so I could see refresh tokens coming up soon. Or not being able to edit or delete brain dumps. I just want to see what my needs are and address them one at a time. The point is, I need to use the app and build it to be usable. 
+
+Note: for a bit of documentation, 
+
+`eas build -p android --profile preview`
+
+is what I run in order to get a preview build in expo that I can download the apk for (`eas.json` defines the output type). This builds with the environment variables currently included on my machine. I would like to have different env variable profiles for local development and preview builds, but I can look into that later. 
+
+It feels like a strong code smell that because of the expo sdk I use, I've had to drop my overall pnpm version and had to anchor my react versions etc. to a compatible version. I don't think this is the end of the world, but it is a bit annoying. Of course, my website shouldn't have to depend on the version of my expo sdk, they're not related, but because they reference shared packages, expo ends up in charge of everything. And because I like the convenience of expo go, I'm tethered to an older sdk version because the latest expo isn't compatible with expo go yet.
+
 ## 2026-06-24
 ### Brain dump listing 
 The last thing to get feature parity between web and app is brain dump listing. 

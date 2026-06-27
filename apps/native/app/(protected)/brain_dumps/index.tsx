@@ -1,9 +1,8 @@
 import BrainDumpDisplay from "@/components/brain_dump/BrainDumpDisplay";
 import Container from "@/components/layout/Container";
-import Title from "@/components/ui/Title";
 import { styles } from "@/theme/theme";
 import { useInfiniteDumps } from "@davedhd/features/brain_dump/hooks/useBrainDumps";
-import { ActivityIndicator, FlatList, ScrollView, View } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -18,7 +17,6 @@ export default function Index() {
     return (
         <SafeAreaView style={styles.screen}>
             <Container>
-                <Title text="Brain Dumps" />
                 {isLoading && <ActivityIndicator />}
                 {!isLoading && <FlatList
                     data={data?.pages.flatMap(page => page.items) || []}
