@@ -15,7 +15,7 @@ type AuthFormProps = {
 }
 
 export default function AuthForm({ form, action, onSubmit }: AuthFormProps) {
-    const { handleSubmit, control } = form;
+    const { handleSubmit, control, formState } = form;
     const router = useRouter();
 
     const actionText = action === "login" ? "Log in" : "Register";
@@ -50,7 +50,8 @@ export default function AuthForm({ form, action, onSubmit }: AuthFormProps) {
                 title={actionText}
                 onPress={handleSubmit(onSubmit)}
                 variant="primary"
-                disabled={form.formState.isSubmitting}
+                disabled={formState.isSubmitting}
+                isLoading={formState.isSubmitting}
             />
             <Button
                 title={action === "login" ? "Register" : "Log in"}

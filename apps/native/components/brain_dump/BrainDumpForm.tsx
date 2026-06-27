@@ -48,7 +48,10 @@ export default function BrainDumpForm() {
                 numberOfLines={4}
                 expandable
             />
-            <Button title="Submit" onPress={form.handleSubmit(handleCreateDump)} />
+            <Button title="Submit" onPress={form.handleSubmit(handleCreateDump)}
+                disabled={form.formState.isSubmitting}
+                isLoading={form.formState.isSubmitting}
+            />
         </>
     )
 }
