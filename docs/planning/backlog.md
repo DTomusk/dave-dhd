@@ -2,14 +2,25 @@
 
 ## In progress 
 
-- [ ] React native app
-    - Priority: high
-    - Area: app
-    - Type: feature
-    - Why: I've been using the site on my phone, and it feels like an app would be nicer
-    - DoD: 
-
 ## Planning 
+
+- [ ] Delete brain dumps
+    - Priority: 
+    - Area: 
+    - Type: (bug, tech debt, feature)
+    - Why: 
+    - DoD: 
+        - [ ] action menu on dumps 
+        - [ ] delete has confirmation modal 
+        - [ ] reload after delete (tanstack cache clear)
+
+- [ ] edit dumps
+
+- [ ] transform dumps into lists
+
+- [ ] refresh tokens 
+
+- [ ] merge dumps 
 
 ## Item template 
 
@@ -21,6 +32,16 @@
     - DoD: 
 
 ## Done
+
+- [x] React native app
+    - Priority: high
+    - Area: app
+    - Type: feature
+    - Why: I've been using the site on my phone, and it feels like an app would be nicer
+    - DoD:
+        - [x] react native app creative
+        - [x] feature parity with web 
+        - [x] deployable and can be run on mobile device 
 
 - [x] Brain dump (UI)
     - Priority: high
