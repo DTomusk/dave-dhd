@@ -49,7 +49,7 @@ impl BrainDumpRepo {
             r#"
             SELECT COUNT(*)
             FROM brain_dumps
-            WHERE user_id = $1
+            WHERE user_id = $1 AND deleted_at IS NULL
             "#,
             query.user_id,
         )
