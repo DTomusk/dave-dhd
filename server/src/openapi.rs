@@ -29,8 +29,6 @@ use crate::{
         crate::brain_dump::handlers::delete_brain_dumps,
         crate::brain_dump::handlers::get_brain_dumps,
         crate::brain_dump::handlers::post_brain_dump,
-        crate::feature::handlers::get_feature,
-        crate::feature::handlers::get_protected_feature
     ),
     components(
         schemas(

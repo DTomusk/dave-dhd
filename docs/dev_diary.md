@@ -11,12 +11,14 @@ My plan is to use soft deletes, so add a nullable deleted at column to brain dum
 
 Questions: 
 - Should deleted at be on the domain entity? Does the system need to reason about deleted dumps? 
-    - I don't know whether or not it "needs to", yet, but I can just add it for now 
+    - I don't know whether or not it "needs to", yet, but I can just add it for now. Now that I've thought about it, it may be good for a future get deleted endpoint so users can see when they deleted what, but I don't think it matters too much. It's a small bit of data that can be added or removed at any time. 
 - What happens if a user tries to delete a deleted dump? 
     - Idempotency: users should be allowed to delete a deleted dump, but it will be a no-op 
     - In that case, we shouldn't filter by deleted at is null when checking dumps to delete
 - What to do if a request deletes the same dump multiple times? 
     - When executing, get the distinct dump ids in the request 
+
+I've got the main logic for deleting brain dumps working. It's at this point that I start to think, maybe I should have some unit tests? And if I need unit tests, I need to start making my services depend on repo interfaces (which is a good thing long-term).
 
 ## 2026-06-26
 ### App deployment 

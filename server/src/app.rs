@@ -3,9 +3,11 @@ use tower_http::{cors::CorsLayer, trace::TraceLayer};
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 use crate::{
-    app_state::AppState, auth, brain_dump, feature, middleware::rate_limit::{
+    app_state::AppState, 
+    auth, 
+    brain_dump, 
+    middleware::rate_limit::{
         auth_rate_limit, 
-        public_rate_limit, 
         user_rate_limit
     }, openapi::ApiDoc
 };
@@ -28,11 +30,7 @@ pub fn build(app_state: AppState, allowed_origins: Vec<String>) -> Router {
         .allow_headers([AUTHORIZATION, CONTENT_TYPE])
         .allow_credentials(true);
 
-    let public = feature::router::public_router()
-        .layer(public_rate_limit());
-
-    let protected = feature::router::protected_router()
-        .merge(brain_dump::router::protected_router())
+    let protected = brain_dump::router::protected_router()
         .layer(user_rate_limit())
         .layer(middleware::from_fn_with_state(
             app_state.clone(), 
@@ -42,7 +40,6 @@ pub fn build(app_state: AppState, allowed_origins: Vec<String>) -> Router {
     let auth = auth::router().layer(auth_rate_limit());
 
     Router::new()
-        .merge(public)
         .merge(protected)
         .merge(auth)
         .merge(
