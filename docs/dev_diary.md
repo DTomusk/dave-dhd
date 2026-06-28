@@ -3,6 +3,21 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
+## 2026-06-28
+### Deleting dumps 
+The next thing that has annoyed me is not being able to delete stuff. Because I'm testing with my phone and also trying to use the app on my phone in real life, there's a real mix of data. Now, this isn't what a regular user would be doing, but it's annoying to me, so I'm going to fix it. 
+
+My plan is to use soft deletes, so add a nullable deleted at column to brain dumps. Any queries for brain dumps should have a where deleted at is null. I also want to have one delete endpoint that takes an array of dump ids to delete. I don't see the point in having separate delete one and delete many. We'll have to check that the user is the owner of all the dumps, otherwise we fail the request. This shouldn't be a problem in practice when using the UI as a user will only have access to their dumps, but there should be no way for a user to delete (let alone access) someone else's dumps. Here we can probably use a pretty generic error message if the complete list of dumps doesn't belong to the user, or doesn't exist. And we shouldn't have any partial success for a request, it should be all or nothing (either the user owns all requested dumps or not).
+
+Questions: 
+- Should deleted at be on the domain entity? Does the system need to reason about deleted dumps? 
+    - I don't know whether or not it "needs to", yet, but I can just add it for now 
+- What happens if a user tries to delete a deleted dump? 
+    - Idempotency: users should be allowed to delete a deleted dump, but it will be a no-op 
+    - In that case, we shouldn't filter by deleted at is null when checking dumps to delete
+- What to do if a request deletes the same dump multiple times? 
+    - When executing, get the distinct dump ids in the request 
+
 ## 2026-06-26
 ### App deployment 
 Right now, the absolute most important thing for me is to get the app on my phone so I can start using it day-to-day. Until I've done that, I have no evidence of whether the thing I've built is useful or not. 

@@ -1,0 +1,2 @@
+ALTER TABLE brain_dumps
+ADD COLUMN deleted_at TIMESTAMPTZ;
