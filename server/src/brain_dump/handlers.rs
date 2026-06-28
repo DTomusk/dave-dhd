@@ -6,9 +6,7 @@ use crate::{
     app_state::AppState, 
     auth::model::AuthUser, 
     brain_dump::{
-        dto::{BrainDumpPostRequest, BrainDumpResponse}, 
-        model::{BrainDump, BrainDumpQuery},
-        errors::BrainDumpError,
+        dto::{BrainDumpDeleteRequest, BrainDumpPostRequest, BrainDumpResponse}, errors::BrainDumpError, model::{BrainDump, BrainDumpDeleteCommand, BrainDumpQuery}
     }, 
     shared::pagination::dto::{
         OffsetPaginationQuery, 
@@ -77,4 +75,33 @@ pub async fn get_brain_dumps(
     }).collect();
 
     Ok(Json(OffsetPaginationResponse::new(brain_dump_responses, total_count, pagination.offset, pagination.limit)))
+}
+
+#[utoipa::path(
+    delete,
+    path = "/brain-dump",
+    tag = "brain-dump",
+    request_body = BrainDumpDeleteRequest,
+    responses(
+        (status = 200, description = "Brain dumps deleted successfully")
+    ),
+    security(
+        ("bearerAuth" = [])
+    ),
+)]
+pub async fn delete_brain_dumps(
+    State(app_state): State<AppState>,
+    AuthUser { id }: AuthUser,
+    Json(req): Json<BrainDumpDeleteRequest>,
+) -> Result<(), BrainDumpError> {
+    let user_id = Uuid::parse_str(&id).map_err(|e| BrainDumpError::ValidationError(e.to_string()))?;
+    req.validate().map_err(|e| BrainDumpError::ValidationError(e.to_string()))?;
+    
+    let command = BrainDumpDeleteCommand {
+        user_id,
+        ids: req.ids.into_iter().map(|id| Uuid::parse_str(&id).map_err(|e| BrainDumpError::ValidationError(e.to_string()))).collect::<Result<Vec<Uuid>, BrainDumpError>>()?,
+    };
+
+    app_state.brain_dump_service.delete_brain_dumps(&command).await.map_err(|e| BrainDumpError::DatabaseError(e.to_string()))?;
+    Ok(())
 }

@@ -11,6 +11,7 @@ impl BrainDumpRepo {
         Self { pool }
     }
 
+    /// Insert a new brain dump into the database
     pub async fn insert_brain_dump(&self, brain_dump: &BrainDump) -> Result<(), sqlx::Error> {
         sqlx::query!(
             r#"

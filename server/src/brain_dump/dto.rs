@@ -9,6 +9,12 @@ pub struct BrainDumpPostRequest {
     pub content: String,
 }
 
+#[derive(Deserialize, ToSchema, Validate)]
+pub struct BrainDumpDeleteRequest {
+    #[validate(length(min = 1))]
+    pub ids: Vec<String>,
+}
+
 #[derive(Serialize, Debug, ToSchema)]
 pub struct BrainDumpResponse {
     pub id: String,
