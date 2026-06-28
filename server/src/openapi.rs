@@ -15,6 +15,7 @@ use crate::{
         TokenResponse,
     }, 
     brain_dump::dto::{
+        BrainDumpDeleteRequest, 
         BrainDumpPostRequest, 
         BrainDumpResponse,
     },
@@ -25,6 +26,7 @@ use crate::{
     paths(
         crate::auth::handlers::register,
         crate::auth::handlers::login,
+        crate::brain_dump::handlers::delete_brain_dumps,
         crate::brain_dump::handlers::get_brain_dumps,
         crate::brain_dump::handlers::post_brain_dump,
         crate::feature::handlers::get_feature,
@@ -36,11 +38,13 @@ use crate::{
             RegisterRequest, 
             TokenResponse,
             BrainDumpResponse,
+            BrainDumpDeleteRequest,
             BrainDumpPostRequest,
         ),
     ),
     tags(
-        (name = "auth", description = "Authentication related endpoints")
+        (name = "auth", description = "Authentication related endpoints"),
+        (name = "brain-dump", description = "Brain dump related endpoints"),
     ),
     // required for auth button and to add security for specific routes
     modifiers(&SecurityAddon)

@@ -23,8 +23,6 @@ impl BrainDumpService {
             .user_owns_brain_dumps(command.user_id, &command.dump_ids)
             .await?;
         if !owns_all {
-            // TODO: don't let user know that they have the ids of dumps that exist but don't belong to them
-            // But would be good to log that someone tried deleting another person's dumps
             return Err(BrainDumpError::NotFound("brain dumps not found".to_string()));
         }
         // Set deleted at for all dumps 

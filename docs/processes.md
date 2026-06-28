@@ -10,6 +10,9 @@ TODO: This process could be improved
 
 Note: run migrations before modifying any queries
 
+## Swagger 
+Swagger updates automatically when you build (you don't have to run a separate command to generate swagger docs). What you do have to do, however, is document each route function in the handlers, and then register endpoints in `openapi.rs`. 
+
 ## Scripts for running locally
 Run these from the project root:
 

@@ -95,6 +95,7 @@ pub async fn get_brain_dumps(
         ("bearerAuth" = [])
     ),
 )]
+#[debug_handler]
 pub async fn delete_brain_dumps(
     State(app_state): State<AppState>,
     AuthUser { id }: AuthUser,
