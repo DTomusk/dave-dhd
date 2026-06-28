@@ -18,7 +18,7 @@ export default function RootLayout() {
         <SafeAreaProvider>
           <Stack>
             <Stack.Screen name="(protected)" options={{ headerShown: false }} />
-            <Stack.Screen name="auth" options={{ headerShown: false }} /> 
+            <Stack.Screen name="auth" options={{ headerShown: true, title: "Auth" }} /> 
           </Stack>
         </SafeAreaProvider>
       </AuthProvider>

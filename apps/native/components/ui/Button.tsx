@@ -1,20 +1,21 @@
 import { colors, radius, spacing } from "@/theme/theme";
-import { Text, Pressable, StyleSheet } from "react-native";
+import { Text, Pressable, StyleSheet, ActivityIndicator } from "react-native";
 
 type ButtonProps = {
     title: string;
     onPress: () => void;
     variant?: "primary" | "secondary";
     disabled?: boolean;
+    isLoading?: boolean;
 }
 
-export default function Button({ title, onPress, variant = "primary", disabled = false }: ButtonProps) {
+export default function Button({ title, onPress, variant = "primary", disabled = false, isLoading = false }: ButtonProps) {
     const buttonStyle = variant === "primary" ? styles.buttonPrimary : styles.buttonSecondary;
     const textStyle = variant === "primary" ? styles.buttonTextPrimary : styles.buttonTextSecondary;
 
     return (
-        <Pressable style={[styles.buttonBase, buttonStyle]} onPress={onPress} disabled={disabled}>
-            <Text style={textStyle}>{title}</Text>
+        <Pressable style={[styles.buttonBase, buttonStyle, disabled && styles.buttonDisabled]} onPress={onPress} disabled={disabled}>
+            {isLoading ? <ActivityIndicator color={textStyle.color} /> : <Text style={textStyle}>{title}</Text>}
         </Pressable>
     );
 }
@@ -46,5 +47,8 @@ const styles = StyleSheet.create({
   },
   buttonTextSecondary: {
     color: colors.secondaryText,
+  },
+  buttonDisabled: {
+    opacity: 0.5,
   },
 })
