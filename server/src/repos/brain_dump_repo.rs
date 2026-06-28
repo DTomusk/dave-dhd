@@ -26,13 +26,14 @@ impl BrainDumpRepo {
         Ok(())
     }
 
+    /// Get brain dumps for a user with pagination
     pub async fn get_brain_dumps(&self, query: &BrainDumpQuery) -> Result<(Vec<BrainDump>, u64), sqlx::Error> {
         let brain_dumps = sqlx::query_as!(
             BrainDump,
             r#"
-            SELECT id, user_id, content, created_at
+            SELECT id, user_id, content, created_at, deleted_at
             FROM brain_dumps
-            WHERE user_id = $1
+            WHERE user_id = $1 AND deleted_at IS NULL
             ORDER BY created_at DESC
             OFFSET $2
             LIMIT $3

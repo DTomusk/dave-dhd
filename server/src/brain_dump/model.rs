@@ -6,6 +6,7 @@ pub struct BrainDump {
     pub user_id: uuid::Uuid,
     pub content: String,
     pub created_at: OffsetDateTime,
+    pub deleted_at: Option<OffsetDateTime>,
 }
 
 impl BrainDump {
@@ -15,6 +16,7 @@ impl BrainDump {
             user_id,
             content: content.trim().to_string(),
             created_at: OffsetDateTime::now_utc(),
+            deleted_at: None,
         }
     }
 }
