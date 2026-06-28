@@ -6,7 +6,13 @@ use crate::{
     app_state::AppState, 
     auth::model::AuthUser, 
     brain_dump::{
-        dto::{BrainDumpDeleteRequest, BrainDumpPostRequest, BrainDumpResponse}, errors::BrainDumpError, model::{BrainDump, BrainDumpDeleteCommand, BrainDumpQuery}
+        dto::{
+            BrainDumpDeleteRequest, 
+            BrainDumpPostRequest, 
+            BrainDumpResponse,
+        }, 
+        errors::BrainDumpError, 
+        model::{BrainDump, BrainDumpQuery}
     }, 
     shared::pagination::dto::{
         OffsetPaginationQuery, 
@@ -95,13 +101,12 @@ pub async fn delete_brain_dumps(
     Json(req): Json<BrainDumpDeleteRequest>,
 ) -> Result<(), BrainDumpError> {
     let user_id = Uuid::parse_str(&id).map_err(|e| BrainDumpError::ValidationError(e.to_string()))?;
+    // Validate the request body (all ids are valid UUIDs and the list is not empty)
     req.validate().map_err(|e| BrainDumpError::ValidationError(e.to_string()))?;
     
-    let command = BrainDumpDeleteCommand {
-        user_id,
-        ids: req.ids.into_iter().map(|id| Uuid::parse_str(&id).map_err(|e| BrainDumpError::ValidationError(e.to_string()))).collect::<Result<Vec<Uuid>, BrainDumpError>>()?,
-    };
+    // Convert the request into a command, which includes parsing the UUIDs and removing duplicates
+    let command = req.to_command(user_id).map_err(|e| BrainDumpError::ValidationError(e.to_string()))?;
 
-    app_state.brain_dump_service.delete_brain_dumps(&command).await.map_err(|e| BrainDumpError::DatabaseError(e.to_string()))?;
+    app_state.brain_dump_service.delete_brain_dumps(&command).await?;
     Ok(())
 }

@@ -1,6 +1,6 @@
 use sqlx::PgPool;
 
-use crate::brain_dump::model::{BrainDump, BrainDumpQuery};
+use crate::brain_dump::{errors::BrainDumpError, model::{BrainDump, BrainDumpQuery}};
 
 pub struct BrainDumpRepo {
     pub pool: PgPool,
@@ -28,6 +28,7 @@ impl BrainDumpRepo {
     }
 
     /// Get brain dumps for a user with pagination
+    /// Omits deleted brain dumps
     pub async fn get_brain_dumps(&self, query: &BrainDumpQuery) -> Result<(Vec<BrainDump>, u64), sqlx::Error> {
         let brain_dumps = sqlx::query_as!(
             BrainDump,
@@ -59,5 +60,44 @@ impl BrainDumpRepo {
         .unwrap_or(0);
 
         Ok((brain_dumps, total_count as u64))
+    }
+
+    /// Delete brain dumps for a user by setting the deleted_at timestamp
+    /// Includes already deleted brain dumps
+    pub async fn delete_brain_dumps(&self, user_id: uuid::Uuid, dump_ids: &[uuid::Uuid]) -> Result<(), BrainDumpError> {
+        sqlx::query!(
+            r#"
+            UPDATE brain_dumps
+            SET deleted_at = NOW()
+            WHERE user_id = $1 AND id = ANY($2)
+            "#,
+            user_id,
+            dump_ids,
+        )
+        .execute(&self.pool)
+        .await
+        .map_err(|e| BrainDumpError::DatabaseError(e.to_string()))?;
+        Ok(())
+    }
+
+    /// Check if a user owns all the specified brain dumps
+    /// Crucially, dump_ids must be distinct
+    /// Includes already deleted brain dumps
+    pub async fn user_owns_brain_dumps(&self, user_id: uuid::Uuid, dump_ids: &[uuid::Uuid]) -> Result<bool, BrainDumpError> {
+        let count: i64 = sqlx::query_scalar!(
+            r#"
+            SELECT COUNT(*)
+            FROM brain_dumps
+            WHERE user_id = $1 AND id = ANY($2)
+            "#,
+            user_id,
+            dump_ids,
+        )
+        .fetch_one(&self.pool)
+        .await
+        .map_err(|e| BrainDumpError::DatabaseError(e.to_string()))?
+        .unwrap_or(0);
+
+        Ok(count as usize == dump_ids.len())
     }
 }
