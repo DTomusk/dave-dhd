@@ -28,3 +28,20 @@ pub fn verify_jwt(token: &str, secret: &str) -> Result<Claims, jsonwebtoken::err
     )?;
     Ok(token_data.claims)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_generate_and_verify_token() {
+        let secret = "my_secret_key";
+        let user_id = "user123";
+        let duration_minutes = 60;
+
+        let token = generate_token(user_id, secret, duration_minutes).expect("failed to generate token");
+        let claims = verify_jwt(&token, secret).expect("failed to verify token");
+
+        assert_eq!(claims.sub, user_id);
+    }
+}
