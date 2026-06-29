@@ -8,9 +8,6 @@ use server::{
     auth::service::AuthService, 
     brain_dump::service::BrainDumpService, 
     config::Config, 
-    repos::{
-        user_repo::UserRepo,
-    },
 };
 
 // tokio multithreaded runtime needs to be enabled, use full features for simplicity
@@ -32,12 +29,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await
         .expect("Failed to connect to database");
 
-    // clone db_pool (which is an Arc internally)
-    // this allows multiple repos sharing the same pool
-    let user_repo = UserRepo::new(db_pool.clone());
-
     let auth_service = Arc::new(
-        AuthService::new(user_repo, config.jwt_secret.clone(), config.jwt_expiration_minutes)
+        AuthService::new(db_pool.clone(), config.jwt_secret.clone(), config.jwt_expiration_minutes)
     );
 
     let brain_dump_service = Arc::new(

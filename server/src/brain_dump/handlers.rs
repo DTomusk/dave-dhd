@@ -40,7 +40,7 @@ pub async fn post_brain_dump(
     let user_id = Uuid::parse_str(&id).map_err(|e| BrainDumpError::ValidationError(e.to_string()))?;
     req.validate().map_err(|e| BrainDumpError::ValidationError(e.to_string()))?;
     let command = BrainDump::new(user_id, req.content);
-    app_state.brain_dump_service.insert_brain_dump(&command).await.map_err(|e| BrainDumpError::DatabaseError(e.to_string()))?;
+    app_state.brain_dump_service.insert_brain_dump(&command).await?;
     Ok(())
 }
 
@@ -72,7 +72,7 @@ pub async fn get_brain_dumps(
         limit: pagination.limit,
     };
 
-    let (brain_dumps, total_count) = app_state.brain_dump_service.get_brain_dumps(&query).await.map_err(|e| BrainDumpError::DatabaseError(e.to_string()))?;
+    let (brain_dumps, total_count) = app_state.brain_dump_service.get_brain_dumps(&query).await?;
 
     let brain_dump_responses: Vec<BrainDumpResponse> = brain_dumps.into_iter().map(|bd| BrainDumpResponse {
         id: bd.id.to_string(),

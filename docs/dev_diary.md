@@ -4,6 +4,15 @@ Here I'm going to write my thoughts for this site as I have them. Please excuse 
 Note: the days below are in reverse chronological order, but the content within each day reads from top to bottom.
 
 ## 2026-06-29
+### Errors
+The next thing I want to think about is errors. Right now, the way I handle errors is inconsistent. Here's what I'm thinking:
+
+- Repos should return domain errors, otherwise services have to map sql errors, which is a dependency we don't want 
+- General purpose errors should be shared so each domain doesn't have to redefine the same error types 
+- Handlers shouldn't do any extra error mapping, the service should return domain errors, and there should be an into response method for each error saying what code it has etc. 
+
+I don't want to be too concerned over the "perfect" solution, because there is none, and the changes I would make wouldn't be valuable enough to justify it. I mainly want a pattern to follow (and that I can eventually get AI to follow consistently as well), so I want my project to be consistent enough.
+
 ### Repos 
 Last night I spent a while thinking about my architecture and, specifically, how I want to handle repos in the future. Being from a C# OOP clean architecture background, my instinct is always to have an abstract repo that a service depends on, and then an implementation in infrastructure that gets registered as the implementation for the service. However, two things are coming up that I needed to start thinking about in terms of repos: 1. soon I'm going to need transactions, and I'm going to want my services to orchestrate transactions, so there are going to be repo methods that don't use the pool that's usually associated with them, and 2. very soon I'm going to want to write unit tests, so I need to think about mocking if I want to have abstract repos. 
 

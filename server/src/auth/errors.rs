@@ -6,6 +6,8 @@ use axum::{
 };
 use serde_json::json;
 
+use crate::repos::errors::InfrastructureError;
+
 #[derive(Error, Debug)]
 pub enum AuthError {
     #[error("User already exists")]
@@ -15,7 +17,7 @@ pub enum AuthError {
     #[error("Validation error: {0}")]
     ValidationError(String),
     #[error("Repository error: {0}")]
-    RepositoryError(sqlx::Error),
+    RepositoryError(InfrastructureError),
     #[error("Token generation error: {0}")]
     TokenGenerationError(jsonwebtoken::errors::Error),
     #[error("Unauthorized")]
