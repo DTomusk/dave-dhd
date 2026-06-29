@@ -23,4 +23,4 @@ Orchestrate use cases. Take in commands and return data. This is the innermost l
 Domain models. Services reason about models. Again, as few dependencies as possible.
 
 # Repo: 
-Data persistence. These receive and return models (again, so services don't have to know about persistence details).
+Data persistence. These receive and return models and domain errors (again, so services don't have to know about persistence details). Repos are stateless. In fact, they are just collections of functions that receive an Executor, so they don't get initialised or injected into services. Repos are mainly grouped together for organisational purposes.
