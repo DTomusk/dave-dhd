@@ -1,4 +1,4 @@
-use sqlx::PgPool;
+use sqlx::{Executor, Postgres};
 
 use crate::{
     brain_dump::{
@@ -11,7 +11,10 @@ use crate::{
 };
 
 /// Insert a new brain dump into the database
-pub async fn insert_brain_dump(pool: &PgPool, brain_dump: &BrainDump) -> Result<(), InfrastructureError> {
+pub async fn insert_brain_dump<'e, E>(executor: E, brain_dump: &BrainDump) -> Result<(), InfrastructureError>
+where
+    E: Executor<'e, Database = Postgres>,
+{
     sqlx::query!(
         r#"
         INSERT INTO brain_dumps (id, user_id, content)
@@ -21,7 +24,7 @@ pub async fn insert_brain_dump(pool: &PgPool, brain_dump: &BrainDump) -> Result<
         brain_dump.user_id,
         brain_dump.content,
     )
-    .execute(pool)
+    .execute(executor)
     .await
     .map_err(|e| DatabaseError(e.to_string()))?;
     Ok(())
@@ -29,7 +32,10 @@ pub async fn insert_brain_dump(pool: &PgPool, brain_dump: &BrainDump) -> Result<
 
 /// Get brain dumps for a user with pagination
 /// Omits deleted brain dumps
-pub async fn get_brain_dumps(pool: &PgPool, query: &BrainDumpQuery) -> Result<(Vec<BrainDump>, u64), InfrastructureError> {
+pub async fn get_brain_dumps<'e, E>(executor: E, query: &BrainDumpQuery) -> Result<(Vec<BrainDump>, u64), InfrastructureError>
+where
+    E: Executor<'e, Database = Postgres> + Copy,
+{
     let brain_dumps = sqlx::query_as!(
         BrainDump,
         r#"
@@ -44,7 +50,7 @@ pub async fn get_brain_dumps(pool: &PgPool, query: &BrainDumpQuery) -> Result<(V
         query.offset as i64,
         query.limit as i64,
     )
-    .fetch_all(pool)
+    .fetch_all(executor)
     .await
     .map_err(|e| DatabaseError(e.to_string()))?;
 
@@ -56,7 +62,7 @@ pub async fn get_brain_dumps(pool: &PgPool, query: &BrainDumpQuery) -> Result<(V
         "#,
         query.user_id,
     )
-    .fetch_one(pool)
+    .fetch_one(executor)
     .await
     .map_err(|e| DatabaseError(e.to_string()))?
     .unwrap_or(0);
@@ -66,7 +72,10 @@ pub async fn get_brain_dumps(pool: &PgPool, query: &BrainDumpQuery) -> Result<(V
 
 /// Delete brain dumps for a user by setting the deleted_at timestamp
 /// Includes already deleted brain dumps
-pub async fn delete_brain_dumps(pool: &PgPool, user_id: uuid::Uuid, dump_ids: &[uuid::Uuid]) -> Result<(), InfrastructureError> {
+pub async fn delete_brain_dumps<'e, E>(executor: E, user_id: uuid::Uuid, dump_ids: &[uuid::Uuid]) -> Result<(), InfrastructureError>
+where
+    E: Executor<'e, Database = Postgres>,
+{
     sqlx::query!(
         r#"
         UPDATE brain_dumps
@@ -76,7 +85,7 @@ pub async fn delete_brain_dumps(pool: &PgPool, user_id: uuid::Uuid, dump_ids: &[
         user_id,
         dump_ids,
     )
-    .execute(pool)
+    .execute(executor)
     .await
     .map_err(|e| DatabaseError(e.to_string()))?;
     Ok(())
@@ -85,7 +94,10 @@ pub async fn delete_brain_dumps(pool: &PgPool, user_id: uuid::Uuid, dump_ids: &[
 /// Check if a user owns all the specified brain dumps
 /// Crucially, dump_ids must be distinct
 /// Includes already deleted brain dumps
-pub async fn user_owns_brain_dumps(pool: &PgPool, user_id: uuid::Uuid, dump_ids: &[uuid::Uuid]) -> Result<bool, InfrastructureError> {
+pub async fn user_owns_brain_dumps<'e, E>(executor: E, user_id: uuid::Uuid, dump_ids: &[uuid::Uuid]) -> Result<bool, InfrastructureError>
+where
+    E: Executor<'e, Database = Postgres>,
+{
     let count: i64 = sqlx::query_scalar!(
         r#"
         SELECT COUNT(*)
@@ -95,7 +107,7 @@ pub async fn user_owns_brain_dumps(pool: &PgPool, user_id: uuid::Uuid, dump_ids:
         user_id,
         dump_ids,
     )
-    .fetch_one(pool)
+    .fetch_one(executor)
     .await
     .map_err(|e| DatabaseError(e.to_string()))?
     .unwrap_or(0);

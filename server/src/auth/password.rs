@@ -20,3 +20,16 @@ pub fn verify_password(password: &str, hash: &str) -> bool {
     let parsed_hash = argon2::PasswordHash::new(hash).expect("Failed to parse password hash");
     Argon2::default().verify_password(password.as_bytes(), &parsed_hash).is_ok()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_hash_and_verify_password() {
+        let password = "my_secure_password";
+        let hash = hash_password(password);
+        assert!(verify_password(password, &hash));
+        assert!(!verify_password("wrong_password", &hash));
+    }
+}

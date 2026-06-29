@@ -23,6 +23,7 @@ impl AuthService {
     ) -> Self {
         Self { pool, jwt_secret, jwt_expiration_minutes }
     }
+    
     pub async fn register_user(
         &self,
         command: RegisterUserCommand,
