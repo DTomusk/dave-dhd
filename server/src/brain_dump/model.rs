@@ -28,6 +28,7 @@ pub struct BrainDumpQuery {
     pub limit: u32,
 }
 
+#[derive(Debug)]
 pub struct BrainDumpDeleteCommand {
     pub user_id: Uuid,
     pub dump_ids: Vec<Uuid>,

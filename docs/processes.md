@@ -31,3 +31,11 @@ This is handled automatically by Vercel on every push (probably should be modifi
 
 ### Native app
 Run `eas build -p android --profile preview` from `.\apps\native` (because that's where the eas and app files are). This will trigger a preview build in eas. The 
+
+## Automated testing
+### Server 
+We use `cargo test` in `.\server` to run automated tests. 
+
+You can run tests for specific files like so: `cargo test brain_dump::dto`
+
+You can also run the tests in the file itself in VS Code. 

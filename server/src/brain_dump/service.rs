@@ -35,7 +35,7 @@ impl BrainDumpService {
         let owns_all = brain_dump_repo::user_owns_brain_dumps(&self.pool, command.user_id, &command.dump_ids)
         .await
         .map_err(|e| BrainDumpError::RepositoryError(e))?;
-    
+
         if !owns_all {
             return Err(BrainDumpError::NotFound("brain dumps not found".to_string()));
         }
@@ -44,6 +44,7 @@ impl BrainDumpService {
         brain_dump_repo::delete_brain_dumps(&self.pool, command.user_id, &command.dump_ids)
         .await
         .map_err(|e| BrainDumpError::RepositoryError(e))?;
+    
         Ok(())
     }
 }
