@@ -14,7 +14,7 @@ pub struct BrainDumpPostRequest {
 
 #[derive(Deserialize, ToSchema, Validate)]
 pub struct BrainDumpDeleteRequest {
-    #[validate(length(min = 1), custom(function = "validate_ids_are_uuids"))]
+    #[validate(length(min = 1))]
     pub ids: Vec<String>,
 }
 
@@ -34,17 +34,8 @@ fn validate_not_blank(content: &str) -> Result<(), ValidationError> {
     Ok(())
 }
 
-// TODO: same as above, this should be a shared validator function
-fn validate_ids_are_uuids(ids: &[String]) -> Result<(), ValidationError> {
-    for id in ids {
-        if Uuid::parse_str(id).is_err() {
-            return Err(ValidationError::new("invalid_uuid"));
-        }
-    }
-    Ok(())
-}
-
 impl BrainDumpDeleteRequest {
+    /// Converts the DTO into a domain command, validating the UUIDs and removing duplicates.
     pub fn to_command(&self, user_id: Uuid) -> Result<super::model::BrainDumpDeleteCommand, ValidationError> {
         let mut seen = HashSet::with_capacity(self.ids.len());
         let mut out: Vec<Uuid> = Vec::with_capacity(self.ids.len());

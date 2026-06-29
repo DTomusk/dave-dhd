@@ -9,7 +9,6 @@ use server::{
     brain_dump::service::BrainDumpService, 
     config::Config, 
     repos::{
-        brain_dump_repo::BrainDumpRepo, 
         user_repo::UserRepo,
     },
 };
@@ -41,9 +40,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         AuthService::new(user_repo, config.jwt_secret.clone(), config.jwt_expiration_minutes)
     );
 
-    let brain_dump_repo = BrainDumpRepo::new(db_pool.clone());
     let brain_dump_service = Arc::new(
-        BrainDumpService::new(brain_dump_repo)
+        BrainDumpService::new(db_pool.clone())
     );
 
     let app_state = AppState {

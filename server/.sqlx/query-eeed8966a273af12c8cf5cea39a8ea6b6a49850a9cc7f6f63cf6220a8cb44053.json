@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n            SELECT id, user_id, content, created_at, deleted_at\n            FROM brain_dumps\n            WHERE user_id = $1 AND deleted_at IS NULL\n            ORDER BY created_at DESC\n            OFFSET $2\n            LIMIT $3\n            ",
+  "query": "\n        SELECT id, user_id, content, created_at, deleted_at\n        FROM brain_dumps\n        WHERE user_id = $1 AND deleted_at IS NULL\n        ORDER BY created_at DESC\n        OFFSET $2\n        LIMIT $3\n        ",
   "describe": {
     "columns": [
       {
@@ -74,5 +74,5 @@
       true
     ]
   },
-  "hash": "6aa2e51f5ecdbbfa431ad3c218ca8328c1748fc81377fb5dab33a7d831f945cd"
+  "hash": "eeed8966a273af12c8cf5cea39a8ea6b6a49850a9cc7f6f63cf6220a8cb44053"
 }

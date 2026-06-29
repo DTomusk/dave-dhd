@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n            SELECT COUNT(*)\n            FROM brain_dumps\n            WHERE user_id = $1 AND deleted_at IS NULL\n            ",
+  "query": "\n        SELECT COUNT(*)\n        FROM brain_dumps\n        WHERE user_id = $1 AND deleted_at IS NULL\n        ",
   "describe": {
     "columns": [
       {
@@ -19,5 +19,5 @@
       null
     ]
   },
-  "hash": "71942e6d25cfcf67ccd26104e686a85c8c03674b8260bdb823b9f943598b493f"
+  "hash": "e297ad9a04c07c4819ab39059fc1b5351a2554aa900ca53bdf39a24256e977d6"
 }

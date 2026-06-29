@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        UPDATE brain_dumps\n        SET deleted_at = NOW()\n        WHERE user_id = $1 AND id = ANY($2)\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "UuidArray"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "3a7808a59afe71f889541f2af4c4f2fb4693d5754e92fe3bd9de8069c43b6a35"
+}
