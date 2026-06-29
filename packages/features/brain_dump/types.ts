@@ -3,3 +3,7 @@ export type BrainDumpResponse = {
     content: string;
     created_at: string;
 }
+
+export type BrainDumpDeleteRequest = {
+    ids: string[];
+}

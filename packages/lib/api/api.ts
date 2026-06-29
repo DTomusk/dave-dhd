@@ -17,8 +17,9 @@ export const api = {
             body,
         }),
 
-    delete: <T>(url: string) =>
+    delete: <T>(url: string, body?: BodyInit) =>
         apiFetch<T>(url, {
             method: 'DELETE',
+            body,
         }),
 };

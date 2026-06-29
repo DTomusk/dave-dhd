@@ -9,3 +9,7 @@ export function getBrainDumps(input: PaginatedRequest) {
 export function createBrainDump(content: string) {
     return api.post("/brain-dump", JSON.stringify({ content }));
 }
+
+export function deleteBrainDumps(ids: string[]) {
+    return api.delete("/brain-dump", JSON.stringify({ ids }));
+}
