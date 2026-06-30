@@ -2,14 +2,16 @@ import { colors, radius, spacing } from "@/theme/theme";
 import { View, StyleSheet, Pressable } from "react-native";
 
 type CardProps = {
+    header: React.ReactNode;
     children: React.ReactNode;
     onPress?: () => void;
 };
 
-export default function Card({ children, onPress }: CardProps) {
+export default function Card({ header, children, onPress }: CardProps) {
     if (onPress) {
         return (
             <Pressable style={styles.card} onPress={onPress}>
+                {header}
                 {children}
             </Pressable>
         );
@@ -17,6 +19,7 @@ export default function Card({ children, onPress }: CardProps) {
     
     return (
         <View style={styles.card}>
+            {header}
             {children}
         </View>
     );

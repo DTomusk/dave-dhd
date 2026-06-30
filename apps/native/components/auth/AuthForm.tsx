@@ -21,8 +21,8 @@ export default function AuthForm({ form, action, onSubmit }: AuthFormProps) {
     const actionText = action === "login" ? "Log in" : "Register";
 
     return (
-        <Card>
-            <Title text={actionText} />
+        <Card
+            header={<Title text={actionText} />}>
             <NativeFormField
                 control={control}
                 name="username"
