@@ -1,5 +1,7 @@
 import AuthForm from "@/components/auth/AuthForm";
+import Button from "@/components/ui/Button";
 import Callout from "@/components/ui/Callout";
+import { useOverlay } from "@/hooks/useOverlay";
 import { useAuth } from "@davedhd/features/auth/hooks/useAuth";
 import { useLogin } from "@davedhd/features/auth/hooks/useLogin";
 import { LoginSchema } from "@davedhd/features/auth/schemas/loginSchema";
@@ -33,8 +35,24 @@ export default function Login() {
     });
   }
 
+  const overlay = useOverlay();
+
   return (
     <>
+      <Button title="Open overlay" onPress={() =>
+    overlay.showOverlay(
+      <View
+        style={{
+          position: "absolute",
+          top: 200,
+          left: 40,
+          width: 200,
+          height: 200,
+          backgroundColor: "red",
+        }}
+      />
+    )
+  } />
         {mutation.isError && (
           <View style={{ marginBottom: 16 }}>
               <Callout variant="error" 

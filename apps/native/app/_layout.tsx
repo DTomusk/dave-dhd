@@ -6,6 +6,7 @@ import { QueryClientProvider } from "@tanstack/react-query"
 import { AuthProvider } from "@davedhd/features/auth/providers/AuthProvider"
 import { memoryTokenStore } from "@/lib/token";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { OverlayProvider } from "@/providers/OverlayProvider";
 
 const queryClient = createQueryClient();
 initTokenStore(memoryTokenStore);
@@ -16,10 +17,12 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <SafeAreaProvider>
-          <Stack>
-            <Stack.Screen name="(protected)" options={{ headerShown: false }} />
-            <Stack.Screen name="auth" options={{ headerShown: true, title: "Auth" }} /> 
-          </Stack>
+          <OverlayProvider>
+            <Stack>
+              <Stack.Screen name="(protected)" options={{ headerShown: false }} />
+              <Stack.Screen name="auth" options={{ headerShown: true, title: "Auth" }} /> 
+            </Stack>
+          </OverlayProvider>
         </SafeAreaProvider>
       </AuthProvider>
     </QueryClientProvider>
