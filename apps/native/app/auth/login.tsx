@@ -40,19 +40,22 @@ export default function Login() {
   return (
     <>
       <Button title="Open overlay" onPress={() =>
-    overlay.showOverlay(
-      <View
-        style={{
-          position: "absolute",
-          top: 200,
-          left: 40,
+    overlay.showOverlay({
+      content: (
+        <View
+          style={{
+            position: "absolute",
+            top: 200,
+            left: 40,
           width: 200,
           height: 200,
           backgroundColor: "red",
         }}
       />
-    )
-  } />
+    ),
+    dismissOnBackdropPress: true,
+    backdrop: true,
+  })} />
         {mutation.isError && (
           <View style={{ marginBottom: 16 }}>
               <Callout variant="error" 
