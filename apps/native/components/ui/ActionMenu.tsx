@@ -1,9 +1,8 @@
 import { useOverlay } from "@/hooks/useOverlay";
 import Button from "./Button";
 import { View } from "react-native";
-import { useCallback } from "react";
 
-type Action = {
+export type Action = {
     label: string;
     onPress: () => void;
 }
@@ -32,20 +31,4 @@ export default function ActionMenu({ actions, closeOnSelect = true }: ActionMenu
             ))}
         </View>
     );
-}
-
-export function useActionMenu() {
-    const { showOverlay } = useOverlay();
-
-    const openActionMenu = useCallback((actions: Action[], closeOnSelect = true) => {
-        showOverlay({
-            content: (
-                <ActionMenu actions={actions} closeOnSelect={closeOnSelect} />
-            ),
-            dismissOnBackdropPress: true,
-            backdrop: true,
-        });
-    }, [showOverlay]);
-
-    return { openActionMenu };
 }

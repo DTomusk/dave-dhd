@@ -6,7 +6,7 @@ import { useRouter } from "expo-router";
 import Row from "../layout/Row";
 import IconButton from "../ui/IconButton";
 import { Ionicons } from "@expo/vector-icons";
-import { useActionMenu } from "../ui/ActionMenu";
+import { useActionMenu } from "../../hooks/useActionMenu";
 
 export default function BrainDumpDisplay(item: BrainDumpResponse) {
     const router = useRouter();
