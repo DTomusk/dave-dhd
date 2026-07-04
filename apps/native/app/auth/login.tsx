@@ -1,4 +1,5 @@
 import AuthForm from "@/components/auth/AuthForm";
+import ActionMenu, { useActionMenu } from "@/components/ui/ActionMenu";
 import Button from "@/components/ui/Button";
 import Callout from "@/components/ui/Callout";
 import { useOverlay } from "@/hooks/useOverlay";
@@ -35,27 +36,16 @@ export default function Login() {
     });
   }
 
-  const overlay = useOverlay();
+  const { openActionMenu } = useActionMenu();
 
   return (
     <>
       <Button title="Open overlay" onPress={() =>
-    overlay.showOverlay({
-      content: (
-        <View
-          style={{
-            position: "absolute",
-            top: 200,
-            left: 40,
-          width: 200,
-          height: 200,
-          backgroundColor: "red",
-        }}
-      />
-    ),
-    dismissOnBackdropPress: true,
-    backdrop: true,
-  })} />
+        openActionMenu([
+            { label: "Action 1", onPress: () => console.log("Action 1 pressed") },
+            { label: "Action 2", onPress: () => console.log("Action 2 pressed") },
+          ])
+      }/>
         {mutation.isError && (
           <View style={{ marginBottom: 16 }}>
               <Callout variant="error" 
